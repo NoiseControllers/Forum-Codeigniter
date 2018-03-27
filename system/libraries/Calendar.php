@@ -140,7 +140,7 @@ class CI_Calendar {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Initialize the user preferences
+	 * Initialize the User preferences
 	 *
 	 * Accepts an associative array as input, containing display preferences
 	 *
@@ -464,9 +464,9 @@ class CI_Calendar {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Set Default Template Data
+	 * Set Default template Data
 	 *
-	 * This is used in the event that the user has not created their own template
+	 * This is used in the event that the User has not created their own template
 	 *
 	 * @return	array
 	 */
@@ -503,7 +503,7 @@ class CI_Calendar {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Parse Template
+	 * Parse template
 	 *
 	 * Harvests the data within the template {pseudo-variables}
 	 * used to display the calendar

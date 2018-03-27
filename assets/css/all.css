@@ -1,0 +1,51 @@
+*{
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.header{
+	background: #3498db;
+    box-shadow: 0 -3px #9fc6e0 inset;
+    padding: 40px 0;
+}
+.card-icon{
+	padding: 2rem;
+    font-size: 30px;
+    text-align: center;
+}
+.card-views{
+	padding: 1rem;
+}
+.card-last-post{
+	padding: 1rem;
+}
+.mg-20{
+	margin:20px;
+}
+.title {
+    color: #363636;
+    font-size: 2rem;
+    font-weight: 300;
+    line-height: 1.125;
+}
+footer {
+    font-family: "Segoe UI";
+    background: #e9ebec;
+    padding: 12px 0;
+    border-top: 1px solid #bebebe;
+    display: block;
+    font-size: 12px;
+}
+footer, footer a {
+    color: #17191c;
+}
+
+.content {
+    background: #fff;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+	margin-top:40px;
+}

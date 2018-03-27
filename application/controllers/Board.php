@@ -11,7 +11,8 @@ class Board extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Board/Board');
+        $this->load->model('Board/BoardModel');
+
     }
 
     public function index()
@@ -21,7 +22,8 @@ class Board extends CI_Controller
 
     private function execute()
     {
-        $date['board'] = $this->Get_All_Board();
-        $this->load->view('board/index',$date);
+        $this->load->view('template/Head');
+        $this->load->view('template/Footer');
+        var_dump($this->BoardModel->Get_All_Board());
     }
 }

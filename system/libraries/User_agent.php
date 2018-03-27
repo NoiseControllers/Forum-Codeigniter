@@ -51,105 +51,105 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class CI_User_agent {
 
 	/**
-	 * Current user-agent
+	 * Current User-agent
 	 *
 	 * @var string
 	 */
 	public $agent = NULL;
 
 	/**
-	 * Flag for if the user-agent belongs to a browser
+	 * Flag for if the User-agent belongs to a browser
 	 *
 	 * @var bool
 	 */
 	public $is_browser = FALSE;
 
 	/**
-	 * Flag for if the user-agent is a robot
+	 * Flag for if the User-agent is a robot
 	 *
 	 * @var bool
 	 */
 	public $is_robot = FALSE;
 
 	/**
-	 * Flag for if the user-agent is a mobile browser
+	 * Flag for if the User-agent is a mobile browser
 	 *
 	 * @var bool
 	 */
 	public $is_mobile = FALSE;
 
 	/**
-	 * Languages accepted by the current user agent
+	 * Languages accepted by the current User agent
 	 *
 	 * @var array
 	 */
 	public $languages = array();
 
 	/**
-	 * Character sets accepted by the current user agent
+	 * Character sets accepted by the current User agent
 	 *
 	 * @var array
 	 */
 	public $charsets = array();
 
 	/**
-	 * List of platforms to compare against current user agent
+	 * List of platforms to compare against current User agent
 	 *
 	 * @var array
 	 */
 	public $platforms = array();
 
 	/**
-	 * List of browsers to compare against current user agent
+	 * List of browsers to compare against current User agent
 	 *
 	 * @var array
 	 */
 	public $browsers = array();
 
 	/**
-	 * List of mobile browsers to compare against current user agent
+	 * List of mobile browsers to compare against current User agent
 	 *
 	 * @var array
 	 */
 	public $mobiles = array();
 
 	/**
-	 * List of robots to compare against current user agent
+	 * List of robots to compare against current User agent
 	 *
 	 * @var array
 	 */
 	public $robots = array();
 
 	/**
-	 * Current user-agent platform
+	 * Current User-agent platform
 	 *
 	 * @var string
 	 */
 	public $platform = '';
 
 	/**
-	 * Current user-agent browser
+	 * Current User-agent browser
 	 *
 	 * @var string
 	 */
 	public $browser = '';
 
 	/**
-	 * Current user-agent version
+	 * Current User-agent version
 	 *
 	 * @var string
 	 */
 	public $version = '';
 
 	/**
-	 * Current user-agent mobile name
+	 * Current User-agent mobile name
 	 *
 	 * @var string
 	 */
 	public $mobile = '';
 
 	/**
-	 * Current user-agent robot name
+	 * Current User-agent robot name
 	 *
 	 * @var string
 	 */
@@ -653,7 +653,7 @@ class CI_User_agent {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Parse a custom user-agent string
+	 * Parse a custom User-agent string
 	 *
 	 * @param	string	$string
 	 * @return	void
@@ -669,7 +669,7 @@ class CI_User_agent {
 		$this->mobile = '';
 		$this->robot = '';
 
-		// Set the new user-agent string and parse it, unless empty
+		// Set the new User-agent string and parse it, unless empty
 		$this->agent = $string;
 
 		if ( ! empty($string))
