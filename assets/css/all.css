@@ -1,3 +1,6 @@
+body{
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
+}
 *{
 	-webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -8,26 +11,55 @@
     box-shadow: 0 -3px #9fc6e0 inset;
     padding: 40px 0;
 }
-.card-icon{
-	padding: 2rem;
-    font-size: 30px;
-    text-align: center;
+
+/*BOARDS*/
+.category{
+    position: relative;
+    margin: 6px 0 -7px 6px;
 }
-.card-views{
-	padding: 1rem;
+.category .bar {
+    width: 10px;
+    height: calc(100% - 4px);
+    background-color: #ded3e9;
+    border-radius: 3px;
+    position: absolute;
 }
-.card-last-post{
-	padding: 1rem;
+.board {
+    width: 100%;
+    height: 66px;
+    background-color: #e6e6e6;
+    border: 1px solid #d8d7d2;
+    margin: 0 0 5px 15px;
+    border-radius: 3px;
+    float: left;
 }
-.mg-20{
-	margin:20px;
+
+.board .icon {
+    width: 66px;
+    height: 66px;
+    float: left;
+    background-position: 50%;
+    background-repeat: no-repeat;
 }
-.title {
-    color: #363636;
-    font-size: 2rem;
-    font-weight: 300;
-    line-height: 1.125;
+.board span{
+    display: table-cell;
+    vertical-align: middle;
 }
+.board span a{
+    color: #151515;
+    font-weight: 600;
+    font-size: 18px;
+}
+.board .info {
+    height: 66px;
+    display: table;
+    float: left;
+}
+.board .description{
+    font-size: 14px;
+}
+
+/*Footer*/
 footer {
     font-family: "Segoe UI";
     background: #e9ebec;
@@ -38,14 +70,4 @@ footer {
 }
 footer, footer a {
     color: #17191c;
-}
-
-.content {
-    background: #fff;
-    box-shadow: 0 1px 1px rgba(0,0,0,.05);
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-	margin-top:40px;
 }

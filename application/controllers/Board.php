@@ -20,10 +20,17 @@ class Board extends CI_Controller
         $this->execute();
     }
 
+    public function Board($id)
+    {
+        echo $id;
+    }
+
     private function execute()
     {
+        $data['boards'] = $this->BoardModel->Get_All_Board();
+
         $this->load->view('template/Head');
+        $this->load->view('Board/index', $data);
         $this->load->view('template/Footer');
-        var_dump($this->BoardModel->Get_All_Board());
     }
 }
