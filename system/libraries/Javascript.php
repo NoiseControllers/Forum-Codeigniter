@@ -42,7 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @package		CodeIgniter
  * @subpackage	Libraries
- * @category	Javascript
+ * @topics	Javascript
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/user_guide/libraries/javascript.html
  * @deprecated	3.0.0	This was never a good idea in the first place.

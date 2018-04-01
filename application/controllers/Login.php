@@ -48,7 +48,6 @@ class Login extends CI_Controller
            $errors = $this->form_validation->error_array();
         }elseif($this->UserModel->check_user_login($user,$passwd)){
 
-
             $data_user = $this->UserModel->get_data_user_by_nick($user);
 
             $dataUser = array(

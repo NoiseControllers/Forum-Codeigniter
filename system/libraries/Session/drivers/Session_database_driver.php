@@ -42,7 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @package	CodeIgniter
  * @subpackage	Libraries
- * @category	Sessions
+ * @topics	Sessions
  * @author	Andrey Andreev
  * @link	https://codeigniter.com/user_guide/libraries/sessions.html
  */

@@ -16,7 +16,7 @@
     </head>
     <body>
         <div class="login">
-            <form id="login" method="post" action="<?= base_url('index.php/Login/process'); ?>">
+            <form id="login" method="post" action="<?= base_url('Login/process'); ?>">
                 <h2>¡Bienvenido!</h2>
                 <input type="text" name="nick" placeholder="Nick" />
                 <input type="password" name="passwd" placeholder="*****" />

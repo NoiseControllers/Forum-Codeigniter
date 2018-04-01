@@ -42,7 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @package		CodeIgniter
  * @subpackage	Helpers
- * @category	Helpers
+ * @topics	Helpers
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/user_guide/helpers/url_helper.html
  */

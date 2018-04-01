@@ -44,7 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @package		CodeIgniter
  * @subpackage	Libraries
- * @category	HTML Tables
+ * @topics	HTML Tables
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/user_guide/libraries/table.html
  */

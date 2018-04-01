@@ -46,7 +46,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @package		CodeIgniter
  * @subpackage	Drivers
- * @category	Database
+ * @topics	Database
  * @author		Esen Sagynov
  * @link		https://codeigniter.com/user_guide/database/
  */

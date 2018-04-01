@@ -20,7 +20,7 @@
                     <?php if(!$this->session->userdata('id')){ ?>
 
                         <a class="btn btn-success" href="<?= base_url('login'); ?>">Ingresar</a>
-                        <a class="btn btn-info" href="<?= base_url('registro'); ?>">Registrarse</a>
+                        <a class="btn btn-info" href="<?= base_url('register'); ?>">Registrarse</a>
 
                     <?php }else{ ?>
 

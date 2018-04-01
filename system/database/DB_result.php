@@ -44,7 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * This class will not be called directly. Rather, the adapter
  * class for the specific database will extend and instantiate it.
  *
- * @category	Database
+ * @topics	Database
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/user_guide/database/
  */

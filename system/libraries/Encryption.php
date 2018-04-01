@@ -44,7 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @package		CodeIgniter
  * @subpackage	Libraries
- * @category	Libraries
+ * @topics	Libraries
  * @author		Andrey Andreev
  * @link		https://codeigniter.com/user_guide/libraries/encryption.html
  */

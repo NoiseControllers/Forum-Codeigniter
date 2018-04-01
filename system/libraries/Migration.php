@@ -45,7 +45,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @package		CodeIgniter
  * @subpackage	Libraries
- * @category	Libraries
+ * @topics	Libraries
  * @author		Reactor Engineers
  * @link
  */

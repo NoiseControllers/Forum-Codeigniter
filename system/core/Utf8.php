@@ -44,7 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @package		CodeIgniter
  * @subpackage	Libraries
- * @category	UTF-8
+ * @topics	UTF-8
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/user_guide/libraries/utf8.html
  */

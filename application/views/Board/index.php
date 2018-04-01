@@ -12,7 +12,7 @@
                         <div class="icon" style="background-image: url('<?= base_url('assets/img/icon.png'); ?>');"></div>
                         <div class="info">
 							<span>
-								<a href="#"><?= $board['name']; ?></a>
+								<a href="<?= base_url('Forum/board/'.$board['id'].''); ?>"><?= $board['name']; ?></a>
 								<br>
 								<p class="description"><?= $board['description']; ?></p>
 							</span>

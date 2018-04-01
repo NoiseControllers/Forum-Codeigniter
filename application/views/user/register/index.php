@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="login">
-    <form id="register" method="post" action="<?= base_url('index.php/Register/process'); ?>">
+    <form id="register" method="post" action="<?= base_url('Register/process'); ?>">
         <h2>¡Registrate!</h2>
 
         <input type="text" name="nick" placeholder="NickName" />

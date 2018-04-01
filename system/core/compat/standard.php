@@ -42,7 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @package		CodeIgniter
  * @subpackage	CodeIgniter
- * @category	Compatibility
+ * @topics	Compatibility
  * @author		Andrey Andreev
  * @link		https://codeigniter.com/user_guide/
  */

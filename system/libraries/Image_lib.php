@@ -42,7 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @package		CodeIgniter
  * @subpackage	Libraries
- * @category	Image_lib
+ * @topics	Image_lib
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/user_guide/libraries/image_lib.html
  */

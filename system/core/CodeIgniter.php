@@ -44,7 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @package		CodeIgniter
  * @subpackage	CodeIgniter
- * @category	Front-controller
+ * @topics	Front-controller
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/user_guide/
  */
