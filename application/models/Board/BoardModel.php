@@ -38,11 +38,11 @@ class BoardModel extends CI_Model
      */
     public function get_all_topics_by_category($id_cat)
     {
-        $this->db->select('topics.id_topic,messages.title, messages.poster_time,users.nick,topics.locked, count(messages.id_topic) AS mensajes');
-        $this->db->from('topics');
-        $this->db->where('topics.id_board='.$id_cat.'');
-        $this->db->join('messages','messages.id_topic=topics.id_topic','INNER');
-        $this->db->join('users','users.id=messages.id_user','INNER');
+        $this->db->select('messages.id_topic, messages.title, messages.poster_time, users.nick, topics.locked');
+        $this->db->from('messages');
+        $this->db->join('users','users.id = messages.id_user','INNER');
+        $this->db->join('topics','topics.id_topic = messages.id_topic','INNER');
+        $this->db->where('messages.id_board = '.$id_cat.'');
 
         return $this->db->get()->result_array();
     }
