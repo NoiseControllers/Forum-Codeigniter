@@ -34,7 +34,7 @@ class Forum extends CI_Controller
     {
         $data['topics'] = $this->BoardModel->get_all_topics_by_category($id_cat);
         $data['breadcrumb'] = $this->BoardModel->get_category_and_board_name($id_cat);
-        
+
         $this->load->view('template/Head');
         $this->load->view('Board/topics/index',$data);
         $this->load->view('template/Footer');
@@ -44,8 +44,7 @@ class Forum extends CI_Controller
     public function topic($id,$slug)
     {
         $data['replies'] = $this->topicModel->get_topic_by_id($id);
-        $data['breadcrumb'] = $this->BoardModel->get_category_and_board_name($id);
-        //var_dump($data['replies']);
+        $data['breadcrumb'] = $this->BoardModel->get_category_and_board_name($data['replies'][0]['id_board']);
 
         $this->load->view('template/Head');
         $this->load->view('topic/index', $data);
