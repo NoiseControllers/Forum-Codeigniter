@@ -17,6 +17,7 @@ class Forum extends CI_Controller
         $this->load->model('Board/BoardModel');
         $this->load->model('topic/topicModel');
         $this->load->helper('date');
+        $this->load->helper('text');
     }
 
     /**
@@ -41,13 +42,29 @@ class Forum extends CI_Controller
 
     }
 
-    public function topic($id,$slug)
+    /**
+     * @param $id
+     * @param $slug
+     */
+    public function topic($id, $slug)
     {
         $data['replies'] = $this->topicModel->get_topic_by_id($id);
         $data['breadcrumb'] = $this->BoardModel->get_category_and_board_name($data['replies'][0]['id_board']);
 
         $this->load->view('template/Head');
         $this->load->view('topic/index', $data);
+        $this->load->view('template/Footer');
+    }
+
+    /**
+     * @param $id_board
+     */
+    public function post($id_board)
+    {
+        $data['breadcrumb'] = $this->BoardModel->get_category_and_board_name($id_board);
+
+        $this->load->view('template/Head');
+        $this->load->view('topic/form/post',$data);
         $this->load->view('template/Footer');
     }
 

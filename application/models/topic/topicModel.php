@@ -14,6 +14,10 @@ class topicModel extends CI_Model
         $this->load->database();
     }
 
+    /**
+     * @param $id_topic
+     * @return mixed
+     */
     public function get_topic_by_id($id_topic)
     {
         $this->db->select('topics.id_board,topics.locked,users.nick AS author,messages.title, messages.body, messages.poster_time');
@@ -25,6 +29,11 @@ class topicModel extends CI_Model
         return $this->db->get()->result_array();
     }
 
+
+    /**
+     * @param $messageData
+     * @return int
+     */
     public function add_post($messageData)
     {
         $this->db->insert('messages',$messageData);
@@ -36,12 +45,19 @@ class topicModel extends CI_Model
             'id_last_msg' => $message_id,
             'locked' => '0'
         );
+
         $this->db->insert('topics',$topicData);
         $topic_id = $this->db->insert_id();
 
         $this->db->set('id_topic', $topic_id);
         $this->db->where('id_msg', $message_id);
-        $this->db->update('messages');
+        $execute =  $this->db->update('messages');
+
+        if($execute){
+            return $topic_id;
+        }else{
+            return -1;
+        }
 
     }
 

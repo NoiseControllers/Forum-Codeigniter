@@ -183,6 +183,15 @@ body{
     overflow-x: auto;
 }
 
+.bbcode{
+    margin: 8px 8px 8px;
+}
+
+/*Error input*/
+.error-input{
+    border: 1.5px solid #ff4c4c;
+}
+
 /*Footer*/
 footer {
     font-family: "Segoe UI";

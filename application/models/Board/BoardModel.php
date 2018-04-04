@@ -43,6 +43,7 @@ class BoardModel extends CI_Model
         $this->db->join('users','users.id = messages.id_user','INNER');
         $this->db->join('topics','topics.id_topic = messages.id_topic','INNER');
         $this->db->where('messages.id_board = '.$id_cat.'');
+        $this->db->order_by('messages.poster_time DESC');
 
         return $this->db->get()->result_array();
     }
@@ -53,7 +54,7 @@ class BoardModel extends CI_Model
      */
     public function get_category_and_board_name($id_board)
     {
-        $this->db->select('categories.name AS categoria, boards.name AS board, ');
+        $this->db->select('categories.name AS categoria, boards.name AS board, boards.id AS id_board ');
         $this->db->from('boards');
         $this->db->where('id = '.$id_board.'');
         $this->db->join('categories','categories.id_cat = boards.id_cat','INNER');

@@ -4,11 +4,11 @@
         <div class="col-md-10">
             <div id="content">
                 <div class="btn-group">
-                    <a href="#" class="btn btn-default grey"><?= $breadcrumb[0]['categoria']; ?></a>
-                    <a href="#" class="btn btn-default grey on"><?= $breadcrumb[0]['board']; ?></a>
+                    <a href="<?= base_url('Forum/board/'.$breadcrumb[0]['id_board'].'') ?>" class="btn btn-default grey"><?= $breadcrumb[0]['board']; ?></a>
+                    <a href="#" class="btn btn-default grey on"><?= $replies[0]['title']; ?></a>
                 </div>
                 <div class="btn-group pull-right">
-                    <a href="/forum/board/8/2" class="btn grey" style="padding: 9px 12px;"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                    <a href="#" class="btn grey" style="padding: 9px 12px;"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                 </div>
                 <div class="btn-group pull-right">
                     <a class="btn indigo" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i><span> Responder</span></a>
