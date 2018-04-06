@@ -41,7 +41,7 @@ class BoardModel extends CI_Model
         $this->db->select('messages.id_topic, messages.title, messages.poster_time, users.nick, topics.locked');
         $this->db->from('messages');
         $this->db->join('users','users.id = messages.id_user','INNER');
-        $this->db->join('topics','topics.id_topic = messages.id_topic','INNER');
+        $this->db->join('topics','topics.id_topic = messages.id_topic AND topics.id_first_msg = messages.id_msg','INNER');
         $this->db->where('messages.id_board = '.$id_cat.'');
         $this->db->order_by('messages.poster_time DESC');
 
