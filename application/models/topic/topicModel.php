@@ -29,6 +29,15 @@ class topicModel extends CI_Model
         return $this->db->get()->result_array();
     }
 
+    public function get_data_topic_by_id($id_topic)
+    {
+        $this->db->select('topics.id_topic,topics.id_board,messages.title');
+        $this->db->from('topics');
+        $this->db->join('messages','messages.id_msg=topics.id_first_msg','INNER');
+        $this->db->where('topics.id_topic='.$id_topic.'');
+        return $this->db->get()->result_array();
+    }
+
 
     /**
      * @param $messageData
@@ -59,6 +68,16 @@ class topicModel extends CI_Model
             return -1;
         }
 
+    }
+
+    public function add_reply($replyData)
+    {
+        $query = $this->db->insert('messages',$replyData);
+        if($query){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }

@@ -68,6 +68,15 @@ class Forum extends CI_Controller
         $this->load->view('template/Footer');
     }
 
+    public function reply($id_topic)
+    {
+        $data['topic'] = $this->topicModel->get_data_topic_by_id($id_topic);
+
+        $this->load->view('template/Head');
+        $this->load->view('topic/form/reply',$data);
+        $this->load->view('template/Footer');
+    }
+
     /**
      *
      */

@@ -51,6 +51,37 @@ class Topic extends CI_Controller
 
     }
 
+    public function reply($id_topic)
+    {
+        $errors = array();
+        $topic = $this->topicModel->get_data_topic_by_id($id_topic);
+
+        $id_user = 1;
+        $title = "RE: ".$topic[0]['title'];
+        $body = $this->input->post('topic_body');
+
+        $this->form_validation->set_rules('topic_body','message','required|xss_clean');
+
+        $dataReply = array(
+            'id_topic' => $topic[0]['id_topic'],
+            'id_board' => $topic[0]['id_board'],
+            'id_user' => $id_user,
+            'title' => $title,
+            'body' => $body,
+            'poster_time' => time()
+        );
+
+        if($this->form_validation->run() == FALSE){
+            $errors = $this->form_validation->error_array();
+        }elseif($this->topicModel->add_reply($dataReply)){
+            $errors['error'] = false;
+        }else{
+            $errors['error'] = true;
+        }
+
+        echo json_encode($errors);
+    }
+
 
 
 }
