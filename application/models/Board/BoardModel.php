@@ -23,10 +23,9 @@ class BoardModel extends CI_Model
     public function Get_All_Board()
     {
 
-        $this->db->select('boards.id, categories.color, boards.name, boards.description');
-        $this->db->from('boards');
-        $this->db->join('categories','categories.id_cat=boards.id_cat', 'INNER');
-        $this->db->order_by('categories.cat_order');
+        $this->db->select('categories.color, boards.name, boards.description, boards.id');
+        $this->db->from('categories');
+        $this->db->join('boards','boards.id_cat=categories.id_cat', 'INNER');
 
         return $this->db->get()->result_array();
 
@@ -38,11 +37,13 @@ class BoardModel extends CI_Model
      */
     public function get_all_topics_by_category($id_cat)
     {
-        $this->db->select('messages.id_topic, messages.title, messages.poster_time, users.nick, topics.locked');
-        $this->db->from('messages');
-        $this->db->join('users','users.id = messages.id_user','INNER');
-        $this->db->join('topics','topics.id_topic = messages.id_topic AND topics.id_first_msg = messages.id_msg','INNER');
-        $this->db->where('messages.id_board = '.$id_cat.'');
+        $this->db->select('topics.id_topic, topics.locked, messages.title, users.nick AS author, messages.poster_time AS time_topic, user_last.nick AS last_user_msg, last_msg.poster_time AS last_poster_msg');
+        $this->db->from('topics');
+        $this->db->join('messages','messages.id_msg = topics.id_first_msg','INNER');
+        $this->db->join('users','users.id=messages.id_user','INNER');
+        $this->db->join('messages AS last_msg','last_msg.id_msg = topics.id_last_msg','INNER');
+        $this->db->join('users AS user_last','user_last.id = last_msg.id_user','INNER');
+        $this->db->where("topics.id_board = $id_cat");
         $this->db->order_by('messages.poster_time DESC');
 
         return $this->db->get()->result_array();

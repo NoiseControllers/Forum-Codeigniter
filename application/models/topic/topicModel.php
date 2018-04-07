@@ -20,7 +20,7 @@ class topicModel extends CI_Model
      */
     public function get_topic_by_id($id_topic)
     {
-        $this->db->select('topics.id_board,topics.locked,users.nick AS author,messages.title, messages.body, messages.poster_time');
+        $this->db->select('topics.id_topic,messages.id_msg,topics.id_board,topics.locked,users.nick AS author,messages.title, messages.body, messages.poster_time');
         $this->db->from('topics');
         $this->db->where('topics.id_topic='.$id_topic.'');
         $this->db->join('messages','messages.id_topic = topics.id_topic','INNER');
@@ -74,10 +74,29 @@ class topicModel extends CI_Model
     {
         $query = $this->db->insert('messages',$replyData);
         if($query){
+            $this->update_last_msg_in_topic($this->db->insert_id(),$replyData['id_topic']);
             return true;
         }else{
             return false;
         }
+    }
+
+    private function update_last_msg_in_topic($id_last_msg,$id_topic)
+    {
+        $this->db->set('id_last_msg',$id_last_msg);
+        $this->db->where('id_topic',$id_topic);
+
+        $this->db->update('topics');
+    }
+
+    public function get_message_by_id_msg($id_msg)
+    {
+        $this->db->select(',users.nick,messages.body, messages.poster_time');
+        $this->db->from('messages');
+        $this->db->where("id_msg=$id_msg");
+        $this->db->join('users','users.id=messages.id_user','INNER');
+
+        return $this->db->get()->result_array();
     }
 
 }
