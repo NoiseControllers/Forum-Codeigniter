@@ -28,7 +28,7 @@
                         <button clasS="btn btn-primary pull-right"><i class="fa fa-reply" aria-hidden="true"></i></button>
                     </div>
                     <div class="body text">
-                        <?= nl2br($reply['body']); ?>
+                        <?= $reply['body']; ?>
                     </div>
                 </div>
                 <?php } ?>
