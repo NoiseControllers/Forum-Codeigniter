@@ -227,3 +227,51 @@ header ul.reset li, header ul.reset li a {
     font-family: "Segoe UI";
     font-size: 12px;
 }
+
+/*User Profile*/
+#head {
+    width: 100%;
+    height: 150px;
+    font-size: 15px;
+    float: left;
+    background-size: cover;
+    overflow: hidden;
+    border-radius: 4px 4px 0px 0px;
+}
+#head #overlay {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg,transparent 20%,rgba(0,0,0,.55));
+}
+#head #account {
+    height: 108px;
+    width: 108px;
+    margin: 10px 0 0 15px;
+    padding: 3px;
+    float: left;
+}
+#head #account #avatar {
+    width: 120px;
+    height: 120px;
+    background-size: auto 100%;
+    border-radius: 100%;
+    background-position: 50%!important;
+    box-shadow: 0 0 5px rgba(0,0,0,.3);
+}
+#head #name {
+    height: 34px;
+    margin: 45px 0 0 20px;
+    padding: 5px;
+    text-align: left;
+    text-shadow: 0 1px 1px rgba(0,0,0,.8);
+    font-size: 25px;
+    line-height: 25px;
+    color: #fff;
+    float: left;
+}
+#head #like{
+    margin: 60px 20px 0 0;
+}
+.list-group-item:nth-child(2n+1) {
+    background-color: #ededed;
+}

@@ -84,5 +84,49 @@ class UserModel extends CI_Model
         return $execute;
     }
 
+    /**
+     * @param $id_user
+     * @return mixed
+     */
+    public function get_last_activity_by_id_user($id_user)
+    {
+        $this->db->select('messages.id_topic,messages.title,messages.poster_time');
+        $this->db->from('messages');
+        $this->db->where("id_user=$id_user");
+        $this->db->order_by('messages.poster_time DESC');
+        $this->db->limit(5);
+
+        return $this->db->get()->result_array();
+    }
+
+    /**
+     * @param $id_user
+     * @return mixed
+     */
+    public function get_the_total_of_topics_by_user($id_user)
+    {
+
+        $this->db->select('count(topics.id_topic) AS totalTopics');
+        $this->db->from('messages');
+        $this->db->join('topics','topics.id_first_msg=messages.id_msg','INNER');
+        $this->db->where("messages.id_user=$id_user");
+
+        return $this->db->get()->result_array();
+    }
+
+    /**
+     * @param $id_user
+     * @return mixed
+     */
+    public function get_the_total_of_messages_by_user($id_user)
+    {
+
+        $this->db->select('count(messages.id_msg) as totalMessages');
+        $this->db->from('messages');
+        $this->db->where("messages.id_user=$id_user");
+
+        return $this->db->get()->result_array();
+    }
+
 
 }

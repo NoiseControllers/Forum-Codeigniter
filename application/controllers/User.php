@@ -11,6 +11,29 @@ class User extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('User/UserModel');
+        $this->load->helper('date');
+        $this->load->helper('text');
+    }
+
+    public function Settings()
+    {
+
+    }
+
+    /**
+     * @param $user
+     */
+    public function Profile($user)
+    {
+        $data['user'] = $this->UserModel->get_data_user_by_nick($user);
+        $data['last_activity'] = $this->UserModel->get_last_activity_by_id_user($data['user'][0]['id']);
+        $data['totalTopics'] = $this->UserModel->get_the_total_of_topics_by_user($data['user'][0]['id']);
+        $data['totalMessages'] = $this->UserModel->get_the_total_of_messages_by_user($data['user'][0]['id']);
+
+        $this->load->view('template/Head');
+        $this->load->view('user/profile/profile',$data);
+        $this->load->view('template/Footer');
     }
 
     public function Logout()

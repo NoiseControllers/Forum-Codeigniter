@@ -68,7 +68,11 @@ class Forum extends CI_Controller
         $this->load->view('template/Footer');
     }
 
-    public function reply($id_topic,$id_msg=0)
+    /**
+     * @param $id_topic
+     * @param int $id_msg
+     */
+    public function reply($id_topic, $id_msg=0)
     {
         $data['topic'] = $this->topicModel->get_data_topic_by_id($id_topic);
         $quote = $this->topicModel->get_message_by_id_msg($id_msg);
