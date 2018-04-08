@@ -204,3 +204,26 @@ footer {
 footer, footer a {
     color: #17191c;
 }
+
+/*User Head template*/
+header .avatar {
+    float: left;
+    margin-right: 15px;
+    width: 84px;
+    height: 84px;
+}
+header ul.reset {
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+header ul.reset li.user {
+    font-size: 16px;
+    font-weight: bold;
+}
+header ul.reset li, header ul.reset li a {
+    color: #FFF;
+    font-family: "Segoe UI";
+    font-size: 12px;
+}

@@ -24,7 +24,7 @@ class Topic extends CI_Controller
         $this->form_validation->set_rules('title_post', 'title', 'required|xss_clean|max_length[140]');
         $this->form_validation->set_rules('body_post','message','required|xss_clean');
 
-        $id_user = 1;
+        $id_user = $this->session->id;
         $id_board = $this->input->post('id_board');
         $title = $this->input->post('title_post');
         $body = $this->input->post('body_post');
@@ -56,7 +56,7 @@ class Topic extends CI_Controller
         $errors = array();
         $topic = $this->topicModel->get_data_topic_by_id($id_topic);
 
-        $id_user = 1;
+        $id_user = $this->session->id;
         $title = "RE: ".$topic[0]['title'];
         $body = $this->input->post('topic_body');
 

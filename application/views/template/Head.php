@@ -25,12 +25,12 @@
                     <?php }else{ ?>
 
                         <!-- USUARIO LOGGIN -->
-                        <img src="<?= base_url('upload/avatars/').$this->session->userdata('avatar'); ?>" class="avatar img-thumbnail" alt="*">
+                        <img src="<?= base_url('uploads/users/avatars/').$this->session->userdata('avatar'); ?>" class="avatar img-thumbnail" alt="*">
                         <ul class="reset">
                             <li class="user">Hola <?= $this->session->userdata('nick'); ?></li>
                             <li><a href="#">Perfil</a></li>
-                            <li><a href="<?= base_url('usuario/ajustes'); ?>">Configuración del perfil</a></li>
-                            <li><a href="<?= base_url('usuario/logout'); ?>">Salir</a></li>
+                            <li><a href="<?= base_url('User/settings'); ?>">Configuración del perfil</a></li>
+                            <li><a href="<?= base_url('User/logout'); ?>">Salir</a></li>
                         </ul>
                     <?php } ?>
                 </div>
