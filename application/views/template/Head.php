@@ -13,7 +13,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <img src="<?= base_url('assets/img/logo.png'); ?>" alt="logo">
+                    <a href="<?= base_url(); ?>"><img src="<?= base_url('assets/img/logo.png'); ?>" alt="logo"></a>
                 </div>
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
@@ -29,7 +29,7 @@
                         <img src="<?= base_url('uploads/users/avatars/').$this->session->userdata('avatar'); ?>" class="avatar img-thumbnail" alt="*">
                         <ul class="reset">
                             <li class="user">Hola <?= $this->session->userdata('nick'); ?></li>
-                            <li><a href="#">Perfil</a></li>
+                            <li><a href="<?= base_url('User/profile/'.$this->session->nick); ?>">Perfil</a></li>
                             <li><a href="<?= base_url('User/settings'); ?>">Configuración del perfil</a></li>
                             <li><a href="<?= base_url('User/logout'); ?>">Salir</a></li>
                         </ul>
