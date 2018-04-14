@@ -10,7 +10,7 @@
                             <div id="name">
                                 <?= $user[0]['nick']; ?>
                             </div>
-                            <button id="like" class="btn btn-danger pull-right"><i class="fa fa-heart" aria-hidden="true"></i> 0</button>
+                            <button id="like" data-id="<?= $user[0]['id']; ?>" class="btn btn-danger pull-right"><i class="fa fa-heart" aria-hidden="true"></i> <span id="totalLikes"><?= $totalLikes[0]; ?></span></button>
                             <div class='heart-animation-1'></div>
                             <div class='heart-animation-2'></div>
                         </div>

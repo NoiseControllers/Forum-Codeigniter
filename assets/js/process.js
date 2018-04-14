@@ -109,4 +109,29 @@ $(function() {
 
     });
 
+    $( "#like" ).click(function(e) {
+
+        var id = $(this).attr('data-id');
+
+        $.ajax({
+            type : "GET",
+            url : base_url+"profile/likes/set/"+id,
+            data : id,
+            success : function(response) {
+                var object = $.parseJSON(response);
+                switch(true) {
+                    case true === object.success:
+                        console.log(object.values);
+                        $("#totalLikes").html(object.totalLikes);
+                        break;
+                    case false === object.success:
+                        toastr.error(object.values, '¡Oops!');
+                        break;
+                    default:
+                        alert(object.values);
+                }
+            }
+        });
+    });
+
 });

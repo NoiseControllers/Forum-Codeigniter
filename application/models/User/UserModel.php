@@ -128,5 +128,10 @@ class UserModel extends CI_Model
         return $this->db->get()->result_array();
     }
 
+    public function aUserExists($id_user)
+    {
+        return $this->db->get_where('users',"id=$id_user")->num_rows();
+    }
+
 
 }

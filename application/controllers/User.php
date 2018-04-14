@@ -12,6 +12,7 @@ class User extends CI_Controller
     {
         parent::__construct();
         $this->load->model('User/UserModel');
+        $this->load->model('User/likesModel');
         $this->load->helper('date');
         $this->load->helper('text');
     }
@@ -30,6 +31,7 @@ class User extends CI_Controller
         $data['last_activity'] = $this->UserModel->get_last_activity_by_id_user($data['user'][0]['id']);
         $data['totalTopics'] = $this->UserModel->get_the_total_of_topics_by_user($data['user'][0]['id']);
         $data['totalMessages'] = $this->UserModel->get_the_total_of_messages_by_user($data['user'][0]['id']);
+        $data['totalLikes'][0] = $this->likesModel->getTotalLikes($data['user'][0]['id']);
 
         $this->load->view('template/Head');
         $this->load->view('user/profile/profile',$data);
