@@ -18,6 +18,8 @@ class Forum extends CI_Controller
         $this->load->model('topic/topicModel');
         $this->load->helper('date');
         $this->load->helper('text');
+
+        $this->output->enable_profiler(TRUE);
     }
 
     /**

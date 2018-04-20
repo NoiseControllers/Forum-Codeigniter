@@ -30,7 +30,7 @@
                         <ul class="reset">
                             <li class="user">Hola <?= $this->session->userdata('nick'); ?></li>
                             <li><a href="<?= base_url('User/profile/'.$this->session->nick); ?>">Perfil</a></li>
-                            <li><a href="<?= base_url('User/settings'); ?>">Configuración del perfil</a></li>
+                            <li><a href="<?= base_url('Profile/Settings'); ?>">Configuración del perfil</a></li>
                             <li><a href="<?= base_url('User/logout'); ?>">Salir</a></li>
                         </ul>
                     <?php } ?>
