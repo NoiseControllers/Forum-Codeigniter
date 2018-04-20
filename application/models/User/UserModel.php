@@ -75,6 +75,15 @@ class UserModel extends CI_Model
         return $this->db->get()->result_array();
     }
 
+    public function get_data_user_by_id($id_user)
+    {
+        $this->db->select('*');
+        $this->db->from('users');
+        $this->db->where("id=$id_user");
+
+        return $this->db->get()->row();
+    }
+
     /**
      * @param $userData
      * @return bool
@@ -131,6 +140,21 @@ class UserModel extends CI_Model
     public function aUserExists($id_user)
     {
         return $this->db->get_where('users',"id=$id_user")->num_rows();
+    }
+
+    public function updateProfile($id_user,$userdata)
+    {
+        $this->db->where('id', $id_user);
+        return $this->db->update('users', $userdata);
+    }
+
+    public function passwordChange($id_user, $password)
+    {
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+
+        $this->db->set('passwd',$hash);
+        $this->db->where('id', $id_user);
+        return $this->db->update('users');
     }
 
 

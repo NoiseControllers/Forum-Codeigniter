@@ -134,4 +134,88 @@ $(function() {
         });
     });
 
+    //Settings
+    $("form#setting").on("submit", function(e){
+        e.preventDefault();
+
+       let email = $.trim($("[name=account_email]").val());
+       let gender = $("[name=account_gender]").val();
+       let location = $("[name=account_location]").val();
+
+        let url = $(this).attr('action');
+
+        let formData = {
+            'email'         : email,
+            'gender'        : gender,
+            'location'      : location,
+        }
+
+        if ('' === email){
+            toastr.error('El correo no puede estar en blanco.','Error');
+            return false;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: formData,
+            dataType: 'json',
+            success : function (res) {
+                console.log(res);
+               if (true === res.success) {
+                    toastr.success(res.value);
+                } else {
+                    toastr.error(res.value, '¡Oops!');
+                }
+            },
+            error: function (res) {
+                toastr.error('El servidor no devolvio lo esperado...','Error');
+            }
+        });
+    });
+
+    $("form#settingPasswd").on("submit", function (e) {
+       e.preventDefault();
+
+       let url              = $(this).attr('action');
+       let passwd_current   = $("[name=passwd_current]").val();
+       let passwd_new       = $("[name=passwd_new]").val();
+       let conf_passwd_new  = $("[name=conf_passwd_new]").val();
+
+       let formData = {
+           'current_passwd' : passwd_current,
+           'new_passwd'     : passwd_new,
+           'conf_passwd'    : conf_passwd_new
+       };
+
+       if ('' === passwd_current || '' === passwd_new || '' === conf_passwd_new ) {
+           toastr.error('La/s contraseña/as no puede/n estar en blanco.','Campos en blanco!');
+           return false;
+       }else if (passwd_new !== conf_passwd_new) {
+           toastr.error('La confirmacion de contraseña no coincide','¡¡Contraseñas incorrectas!!');
+           return false;
+       }
+
+       $.ajax({
+           type: "POST",
+           url: url,
+           data: formData,
+           dataType: 'json',
+
+           success: function (res) {
+               console.log(res);
+               if (true === res.success) {
+                   toastr.success(res.value);
+               }else{
+                   toastr.error(res.value);
+               }
+           },
+           error: function (res) {
+               toastr.error('No se puede completar tu solicitud en este momento. Vuelva a intentarlo más tarde...');
+           },
+       });
+
+    });
+
+
 });
