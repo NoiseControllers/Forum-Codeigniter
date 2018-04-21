@@ -1,18 +1,18 @@
 # Forum-Codeigniter
 Using the CodeIgniter framework
 
+####currently under development unstable version
+
 List of tasks for basic operation
 - [x] Login
 - [x] Register
-- [ ] Categories
-- [ ] Board
-- [ ] Add topic
-- [ ] Edit topic
-- [ ] Add reply
-- [ ] Edit reply
+- [x] Categories 90%
+- [x] Board 90%
+- [ ] CRUD topic
+- [ ] CRUD reply
 - [ ] Pagination replies topic
 - [ ] Pagination topics in boards
-- [ ] Profile
-- [ ] Settings
+- [x] Profile 95%
+- [x] Settings 100%
 - [ ] Private message
 
