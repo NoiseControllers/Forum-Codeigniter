@@ -7,6 +7,7 @@
 		<link rel="stylesheet" href="<?= base_url('assets/css/all.css'); ?>">
 		<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+        <link rel="stylesheet" href="<?= base_url('assets/css/animate.css'); ?>">
     </head>
     <body>
     <header class="header">

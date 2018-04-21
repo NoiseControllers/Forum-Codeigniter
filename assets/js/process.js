@@ -217,5 +217,70 @@ $(function() {
 
     });
 
+    $("form#uploadAvatar").on("submit", function(e) {
+       e.preventDefault();
+       $(".avatar.img-thumbnail").removeClass('animated jackInTheBox');
+       let url = $(this).attr('action');
+
+       $.ajax({
+           type: "POST",
+           url: url,
+           data: new FormData(this),
+           contentType: false,
+           cache: false,
+           processData:false,
+           dataType: 'json',
+           success: function (res) {
+               console.log(res);
+               if (true === res.success) {
+                   toastr.success(res.value);
+                   $(".avatar.img-thumbnail").addClass('animated hinge');
+                   setTimeout(function() {
+                       $(".avatar.img-thumbnail").removeClass('animated hinge').attr('src',res.img).addClass('animated jackInTheBox');
+                   }, 1800);
+                   return false;
+               }
+               toastr.error(res.value);
+           },
+           error: function () {
+               toastr.error('No se puede completar tu solicitud en este momento. Vuelva a intentarlo más tarde...');
+           }
+       });
+        this.reset();
+    });
+
+    $("form#uploadHead").on("submit", function (e) {
+       e.preventDefault();
+
+       $("#img_header").removeClass('animated flash');
+
+       let url = $(this).attr('action');
+       console.log(url);
+       $.ajax({
+          type: 'post',
+          url: url,
+          data: new FormData(this),
+          contentType: false,
+          cache: false,
+           processData: false,
+           dataType: 'json',
+           success: function (res) {
+              console.log(res);
+               if (true === res.success) {
+                   toastr.success(res.value);
+                   $("#img_header").attr('src',res.img).addClass('animated flash');
+                   return false;
+               }
+               toastr.error(res.value);
+           },
+           error: function () {
+               toastr.error('No se puede completar tu solicitud en este momento. Vuelva a intentarlo más tarde...');
+           }
+       });
+
+       this.reset();
+
+    });
+
 
 });

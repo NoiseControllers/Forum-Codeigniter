@@ -275,3 +275,31 @@ header ul.reset li, header ul.reset li a {
 .list-group-item:nth-child(2n+1) {
     background-color: #ededed;
 }
+
+.submenu {
+    background-color: #3498db;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 0 0 4px 4px;
+    margin-top: -3px;
+    box-shadow: 0px 4px 0px 0px #9fc6e0;
+    border-right: 3px solid #9fc6e0;
+    border-left: 3px solid #9fc6e0;
+    z-index: 9999;
+}
+.submenu > .container-fluid {
+    text-align:center;
+}
+
+.submenu > .container-fluid > a.btn {
+    color:white;
+    font-size: 16px;
+    text-shadow: 0 1px #000;
+    font-weight: 600;
+}
+.submenu > .container-fluid > a.btn.active {
+    background-color: hsla(0,0%,82%,.39);
+    border-radius: 3px;
+    box-shadow:none;
+    webkit-box-shadow: none;
+}

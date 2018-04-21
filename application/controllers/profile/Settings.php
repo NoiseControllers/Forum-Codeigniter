@@ -39,6 +39,21 @@ class Settings extends CI_Controller
             ->view('template/Footer');
     }
 
+    public function avatar()
+    {
+        $user = $this->UserModel->get_data_user_by_id($this->session->id);
+
+        $data['user'] = [
+            'img_header' => $user->img_header
+        ];
+
+        $this
+            ->load
+            ->view('template/Head')
+            ->view('user/setting/avatar/avatar',$data)
+            ->view('template/Footer');
+    }
+
     public function processDataChange()
     {
         $res = new stdClass();
@@ -112,6 +127,65 @@ class Settings extends CI_Controller
         }
 
         echo json_encode($res);
+    }
+
+    public function processUploadAvatar ()
+    {
+        $response = new stdClass();
+
+        $user_id = $this->session->id;
+
+        $config['upload_path']          = './uploads/users/avatars/';
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['encrypt_name']         = true;
+        $config['remove_spaces']        = true;
+
+        $this->load->library('upload', $config);
+        if ( $this->upload->do_upload('userfile')) {
+            $userData = [
+              'avatar' => $this->upload->data('file_name')
+            ];
+
+            $response->success = $this->UserModel->updateProfile($user_id,$userData);
+            $this->session->set_userdata($userData);
+            $response->value = 'Cambios guardados correctamente';
+            $response->img = base_url('uploads/users/avatars/'.$userData['avatar']);
+        }else{
+            $response->success = false;
+            $response->value = $this->upload->display_errors();
+        }
+
+        echo json_encode($response);
+    }
+
+    public function processUploadHead ()
+    {
+        $response = new stdClass();
+
+        $user_id = $this->session->id;
+
+        $config['upload_path']          = './uploads/users/profile/';
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['encrypt_name']         = true;
+        $config['remove_spaces']        = true;
+
+        $this->load->library('upload', $config);
+
+        if ( $this->upload->do_upload('userfile')) {
+
+            $userData = [
+                'img_header' => $this->upload->data('file_name')
+            ];
+
+            $response->success = $this->UserModel->updateProfile($user_id,$userData);
+            $response->value = 'Cambios guardados correctamente';
+            $response->img = base_url('uploads/users/profile/'.$userData['img_header']);
+        }else{
+            $response->success = false;
+            $response->value = $this->upload->display_errors();
+        }
+
+        echo json_encode($response);
     }
 
 }

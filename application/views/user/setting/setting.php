@@ -1,5 +1,20 @@
-<main style="margin-top:8px;">
+<main>
     <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+
+                <div class="submenu">
+                    <div class="container-fluid">
+                        <a class="btn active" href="<?= base_url('Profile/Settings'); ?>">Cuenta</a>
+                        <a class="btn" href="<?= base_url('Profile/Settings/avatar'); ?>">Perfil</a>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-md-4"></div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="col-md-6">
