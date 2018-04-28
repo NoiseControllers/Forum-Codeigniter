@@ -19,7 +19,7 @@ class Forum extends CI_Controller
         $this->load->helper('date');
         $this->load->helper('text');
 
-        $this->output->enable_profiler(TRUE);
+        //$this->output->enable_profiler(TRUE);
     }
 
     /**
@@ -89,6 +89,19 @@ class Forum extends CI_Controller
         $this->load->view('template/Footer');
     }
 
+    public function edit($id_msg)
+    {
+        $id_user = $this->session->id;
+
+        $data['message'] = $this->topicModel->get_message_by_id_msg($id_msg);
+        $data['isTopic'] = $this->topicModel->isTopicAndOwned($id_msg,$id_user);
+
+        $this
+            ->load
+            ->view('template/Head')
+            ->view('topic/form/edit', $data)
+            ->view('template/Footer');
+    }
 
     /**
      *

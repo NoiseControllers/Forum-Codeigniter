@@ -91,12 +91,35 @@ class topicModel extends CI_Model
 
     public function get_message_by_id_msg($id_msg)
     {
-        $this->db->select(',users.nick,messages.body, messages.poster_time');
+        $this->db->select('users.nick, messages.id_msg, messages.title, messages.body, messages.poster_time');
         $this->db->from('messages');
         $this->db->where("id_msg=$id_msg");
         $this->db->join('users','users.id=messages.id_user','INNER');
 
         return $this->db->get()->result_array();
+    }
+
+    public function updateMessageTopic($id_msg, $newDataMessage){
+
+        $this->db->where('id_msg', $id_msg);
+        return $this->db->update('messages', $newDataMessage);
+    }
+
+    public function isTopicAndOwned($id_msg,$id_user)
+    {
+        /**
+         * SELECT COUNT(messages.id_msg)
+         * FROM messages
+         * INNER JOIN topics
+         * ON topics.id_first_msg = messages.id_msg
+         * WHERE messages.id_msg = 2 AND messages.id_user = 1
+         */
+        $this->db->select('*');
+        $this->db->from('messages');
+        $this->db->join('topics','topics.id_first_msg = messages.id_msg','INNER');
+        $this->db->where("messages.id_msg = $id_msg AND messages.id_user = $id_user");
+
+        return $query =  $this->db->get()->num_rows();
     }
 
 }

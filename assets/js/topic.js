@@ -55,4 +55,33 @@ $(function() {
 
     });
 
+    $('form#topicEdit').submit(function( e ) {
+        e.preventDefault();
+        let action = $(this).attr('action');
+
+        $.ajax({
+            type: "POST",
+            url: action,
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData:false,
+            dataType: 'json',
+            success: function (response) {
+                console.log(response);
+
+                if (true === response.success) {
+                    toastr.success(response.value);
+                    return false;
+                }
+                toastr.error(response.value);
+            },
+            error: function () {
+                toastr.error('No se puede completar tu solicitud en este momento. Vuelva a intentarlo más tarde...');
+            }
+
+        });
+
+    });
+
 });

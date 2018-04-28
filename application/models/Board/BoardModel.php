@@ -44,7 +44,7 @@ class BoardModel extends CI_Model
         $this->db->join('messages AS last_msg','last_msg.id_msg = topics.id_last_msg','INNER');
         $this->db->join('users AS user_last','user_last.id = last_msg.id_user','INNER');
         $this->db->where("topics.id_board = $id_cat");
-        $this->db->order_by('messages.poster_time DESC');
+        $this->db->order_by('last_msg.poster_time DESC');
 
         return $this->db->get()->result_array();
     }

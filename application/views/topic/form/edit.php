@@ -5,13 +5,17 @@
             <div id="content">
                 <div class="pull-left">
                     <div class="btn-group">
-                        <a class="btn grey" href="#"><?= $topic[0]['title']; ?></a>
-                        <a class="btn grey on" href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        <a class="btn grey" href=""><?= $message[0]['title']; ?></a>
+                        <a class="btn grey on" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                     </div>
                 </div>
                 <hr>
                 <div class="body">
-                    <form id="reply" method="post" action="<?= base_url('topic/reply/'.$topic[0]['id_topic'].'') ?>" >
+                    <form id="topicEdit" method="post" action="<?= base_url('topic/processEdit') ?>" >
+                        <?php if(1 === $isTopic) { ?>
+                        <input type="text" name="topic_title" class="form-control" placeholder="Escriba un asunto..." value="<?= $message[0]['title']; ?>" >
+
+                        <?php  } ?>
                         <div class="bbcode">
                             <div class="btn-group">
                                 <button class="btn grey" onclick="addTag('topic_reply','b');"><i class="fa fa-bold" aria-hidden="true"></i></button>
@@ -30,11 +34,12 @@
                                 <button class="btn grey"><i class="fa fa-link" aria-hidden="true"></i></button>
                             </div>
                         </div>
-                        <textarea name="topic_body" id="topic_reply" style="height: 250px;margin: 8px 0 8px 0;resize: vertical;" class="form-control" placeholder="Escriba el mensaje" ><?php if(array_key_exists('quote',$topic)) echo $topic['quote']; ?></textarea>
-                        <a href="<?= base_url('Forum/topic/'.$topic[0]['id_topic'].'/'.$topic[0]['title'].''); ?>" class="btn btn-danger pull-left">Cancelar</a>
+                        <textarea name="topic_body" id="topic_reply" style="height: 250px;margin: 8px 0 8px 0;resize: vertical;" class="form-control" placeholder="Escriba el mensaje" ><?= $message[0]['body']; ?></textarea>
+                        <input type="hidden" value="<?= $message[0]['id_msg']; ?>" name="id_msg">
+                        <a href="" class="btn btn-danger pull-left">Cancelar</a>
                         <div class="btn-group pull-right">
                             <a href="#" class="btn grey">Previsualizar</a>
-                            <button type="submit" class="btn btn-success">Responder</button>
+                            <button type="submit" class="btn btn-success">Guardar Cambios</button>
                         </div>
                     </form>
                 </div>

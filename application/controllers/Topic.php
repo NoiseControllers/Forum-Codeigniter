@@ -82,6 +82,40 @@ class Topic extends CI_Controller
         echo json_encode($errors);
     }
 
+    public function processEdit()
+    {
+        $errors = new stdClass();
 
+        $id_user = $this->session->id;
+        $id_msg = $this->input->post('id_msg');
+        $body_msg = $this->input->post('topic_body');
+        $title_msg = $this->input->post('topic_title');
+
+        $this->form_validation->set_rules('topic_body','message','required|xss_clean');
+
+        $newDataMessage = [
+            'body' => $body_msg,
+            'modified_time' => time()
+        ];
+
+        if( !null == $title_msg ) {
+           $newDataMessage['title'] = $title_msg;
+        }
+
+
+        if($this->form_validation->run() == FALSE){
+            $errors->success = false;
+            $errors->value = $this->form_validation->error_array();
+        }elseif($this->topicModel->updateMessageTopic($id_msg, $newDataMessage)){
+            $errors->success = true;
+            $errors->value = 'Cambios Guardados correctamente';
+            $errors->url = base_url('Forum/topic/');
+        }else{
+            $errors->success = false;
+            $errors->value = 'No se pudo completar su solicitud en estos momentos.';
+        }
+
+        echo json_encode($errors);
+    }
 
 }

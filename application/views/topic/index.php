@@ -26,6 +26,7 @@
                     <div class="body">
                         <button class="btn btn-default grey pull-left"><i class="fa fa-clock-o" aria-hidden="true"></i> Hace <?= timespan($reply['poster_time'],time(),1); ?></button>
                         <a href="<?= base_url('Forum/reply/'.$reply['id_topic'].'/'.$reply['id_msg'].''); ?>" class="btn btn-primary pull-right"><i class="fa fa-reply" aria-hidden="true"></i></a>
+                        <a href="<?= base_url('Forum/edit/'.$reply['id_msg']); ?>" class="btn btn-warning pull-right"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                     </div>
                     <div class="body text">
                         <?= $reply['body']; ?>
