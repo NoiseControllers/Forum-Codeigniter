@@ -25,8 +25,11 @@
                     </div>
                     <div class="body">
                         <button class="btn btn-default grey pull-left"><i class="fa fa-clock-o" aria-hidden="true"></i> Hace <?= timespan($reply['poster_time'],time(),1); ?></button>
+                        <button class="btn btn-default grey pull-left disabled <?= (0 == $reply['modified_time']) ? 'hidden' : 'show'; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Hace <?= timespan($reply['modified_time'],time(),1); ?></button>
                         <a href="<?= base_url('Forum/reply/'.$reply['id_topic'].'/'.$reply['id_msg'].''); ?>" class="btn btn-primary pull-right"><i class="fa fa-reply" aria-hidden="true"></i></a>
                         <a href="<?= base_url('Forum/edit/'.$reply['id_msg']); ?>" class="btn btn-warning pull-right"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        <a href="" class="btn indigo pull-right"><i class="fa fa-times" aria-hidden="true"></i></a>
+                        <a href="" class="btn btn-danger pull-right"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                     </div>
                     <div class="body text">
                         <?= $reply['body']; ?>
