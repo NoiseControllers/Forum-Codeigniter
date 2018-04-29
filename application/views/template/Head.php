@@ -8,6 +8,7 @@
 		<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
         <link rel="stylesheet" href="<?= base_url('assets/css/animate.css'); ?>">
+        <script src="https://unpkg.com/sweetalert@2.1.0/dist/sweetalert.min.js"></script>
     </head>
     <body>
     <header class="header">

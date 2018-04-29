@@ -5,7 +5,7 @@
             <div id="content">
                 <div class="pull-left">
                     <div class="btn-group">
-                        <a class="btn grey" href=""><?= $message[0]['title']; ?></a>
+                        <a class="btn grey" href="<?= base_url('Forum/topic/'.$message[0]['id_topic'].'/'.strtolower(url_title(convert_accented_characters($message[0]['title'])))); ?>"><?= $message[0]['title']; ?></a>
                         <a class="btn grey on" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                     </div>
                 </div>

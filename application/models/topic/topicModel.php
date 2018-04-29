@@ -91,7 +91,7 @@ class topicModel extends CI_Model
 
     public function get_message_by_id_msg($id_msg)
     {
-        $this->db->select('users.nick, messages.id_msg, messages.title, messages.body, messages.poster_time');
+        $this->db->select('users.nick, messages.id_msg, messages.id_topic, messages.title, messages.body, messages.poster_time');
         $this->db->from('messages');
         $this->db->where("id_msg=$id_msg");
         $this->db->join('users','users.id=messages.id_user','INNER');
@@ -120,6 +120,12 @@ class topicModel extends CI_Model
         $this->db->where("messages.id_msg = $id_msg AND messages.id_user = $id_user");
 
         return $query =  $this->db->get()->num_rows();
+    }
+
+    public function updateTopic($id_topic,$newDataTopic)
+    {
+        $this->db->where('id_topic', $id_topic);
+        return $this->db->update('topics', $newDataTopic);
     }
 
 }

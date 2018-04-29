@@ -84,4 +84,41 @@ $(function() {
 
     });
 
+    $("#closeTopic").click(function (e) {
+       e.preventDefault();
+
+       let id_topic = $(this).attr('data-id');
+       let url = $(this).attr('href');
+
+        swal({
+            title: "¿Esta seguro?",
+            text: "Una vez el topic este cerrado, no hay vuelta atras.",
+            icon: "warning",
+            dangerMode: true,
+            buttons: ["Cancelar", "Cerrar Tema"],
+        })
+            .then(willDelete => {
+                if (willDelete) {
+
+                    $.ajax({
+                       type: "POST",
+                       action: url,
+                        data: "id_topic="+id_topic,
+                        success: function (response) {
+                           console.log(response);
+                            /*if (true === object.success){
+                                swal("¡Cerrado!", object.value, "success");
+                                return false;
+                            }
+                            toastr.error(response.value);*/
+                        },
+                        error: function () {
+                            toastr.error('No se puede completar tu solicitud en este momento. Vuelva a intentarlo más tarde...');
+                        }
+                    });
+                }
+            });
+
+    });
+
 });

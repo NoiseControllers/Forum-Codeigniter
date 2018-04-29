@@ -118,4 +118,29 @@ class Topic extends CI_Controller
         echo json_encode($errors);
     }
 
+    public function closeTopic()
+    {
+        $error = new stdClass();
+
+        $id_topic = $this->input->post('id_topic');
+        $this->form_validation->set_rules('id_topic','id_topic','required|xss_clean|numeric');
+
+        $newDataTopic = [
+            'locked' => 1
+        ];
+
+        if($this->form_validation->run() == FALSE){
+            $error->success = false;
+            $error->value = $this->form_validation->error_string();
+        }elseif (true === $this->topicModel->updateTopic($id_topic,$newDataTopic)) {
+            $error->success = true;
+            $error->value = 'El tema ha sido cerrado.';
+        }else{
+            $error->success = false;
+            $error->value = 'Hubo un error y no se pudo completar su peticion.';
+        }
+
+        echo json_encode($error);
+    }
+
 }

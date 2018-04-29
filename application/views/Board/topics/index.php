@@ -26,7 +26,7 @@
                         </div>
                     </div>
                     <div class="pull-right">
-                        <a class="btn btn-default small" href="#">Último mensaje por <?= $topic['last_user_msg']; ?></a><br>
+                        <a class="btn btn-default small" href="<?= base_url('User/profile/'.$topic['last_user_msg']); ?>">Último mensaje por <?= $topic['last_user_msg']; ?></a><br>
                         <div class="pull-right">
                             <div class="btn btn-default small disabled right"><i class="fa fa-envelope" aria-hidden="true"></i> 46</div>
                             <div class="btn btn-default small disabled"><i class="fa fa-clock-o" aria-hidden="true"></i> hace <?= timespan($topic['last_poster_msg'],time(),1); ?></div>
