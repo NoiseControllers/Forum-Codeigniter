@@ -90,6 +90,8 @@ $(function() {
        let id_topic = $(this).attr('data-id');
        let url = $(this).attr('href');
 
+       console.log(id_topic+'/'+url);
+
         swal({
             title: "¿Esta seguro?",
             text: "Una vez el topic este cerrado, no hay vuelta atras.",
@@ -102,15 +104,17 @@ $(function() {
 
                     $.ajax({
                        type: "POST",
-                       action: url,
+                       url: url,
                         data: "id_topic="+id_topic,
+                        cache: false,
+                        dataType: 'json',
                         success: function (response) {
                            console.log(response);
-                            /*if (true === object.success){
-                                swal("¡Cerrado!", object.value, "success");
+                            if (true === response.success){
+                                swal("¡Cerrado!", response.value, "success");
                                 return false;
                             }
-                            toastr.error(response.value);*/
+                            toastr.error(response.value);
                         },
                         error: function () {
                             toastr.error('No se puede completar tu solicitud en este momento. Vuelva a intentarlo más tarde...');

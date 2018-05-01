@@ -20,7 +20,7 @@ class topicModel extends CI_Model
      */
     public function get_topic_by_id($id_topic)
     {
-        $this->db->select('topics.id_topic,messages.id_msg,topics.id_board,topics.locked,users.nick AS author,messages.title, messages.body, messages.poster_time, messages.modified_time');
+        $this->db->select('topics.id_topic,messages.id_msg,topics.id_board,topics.locked,users.nick AS author, users.avatar,messages.title, messages.body, messages.poster_time, messages.modified_time');
         $this->db->from('topics');
         $this->db->where('topics.id_topic='.$id_topic.'');
         $this->db->join('messages','messages.id_topic = topics.id_topic','INNER');
