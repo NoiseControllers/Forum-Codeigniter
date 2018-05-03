@@ -75,6 +75,7 @@ class topicModel extends CI_Model
         $query = $this->db->insert('messages',$replyData);
         if($query){
             $this->update_last_msg_in_topic($this->db->insert_id(),$replyData['id_topic']);
+            $this->incrementNumReplies($replyData['id_topic']);
             return true;
         }else{
             return false;
@@ -126,6 +127,13 @@ class topicModel extends CI_Model
     {
         $this->db->where('id_topic', $id_topic);
         return $this->db->update('topics', $newDataTopic);
+    }
+
+    private function incrementNumReplies($id_topic)
+    {
+        $this->db->where('id_topic', $id_topic);
+        $this->db->set('num_replies', 'num_replies+1', FALSE);
+        $this->db->update('topics');
     }
 
 }
