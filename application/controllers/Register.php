@@ -23,7 +23,7 @@ class Register extends CI_Controller
 
     private function execute()
     {
-        if($this->session->logged){
+        if ($this->session->logged) {
             redirect(base_url());
         }
 
@@ -36,7 +36,7 @@ class Register extends CI_Controller
             exit('No direct script access allowed');
         }
 
-        $errors = array();
+        $errors = new stdClass();
 
         $nick = $this->input->post('nick');
         $passwd = $this->input->post('passwd');
@@ -60,12 +60,16 @@ class Register extends CI_Controller
             'date_registered'   => time(),
             'rol'               =>  '0'
         );
+
         if ($this->form_validation->run() == FALSE){
-            $errors = $this->form_validation->error_array();
-        }elseif($this->UserModel->add_user($userData)){
-            $errors['register'] = true;
-        }else{
-            $errors['register'] = false;
+            $errors->success = false;
+            $errors->value = $this->form_validation->error_array();
+        } elseif ($this->UserModel->add_user($userData)) {
+            $errors->success = true;
+            $errors->value = 'Registrado correctamente!';
+        } else {
+            $errors->success = false;
+            $errors->value = 'Hubo un error y no se pudo completar el registro.';
         }
 
         echo json_encode($errors);

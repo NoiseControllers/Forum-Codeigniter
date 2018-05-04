@@ -25,5 +25,8 @@
         <input type="submit" value="Registrarse" />
     </form>
 </div>
+<script>
+    var base_url = "<?= base_url(); ?>";
+</script>
 </body>
 </html>

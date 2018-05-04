@@ -35,7 +35,7 @@ class Login extends CI_Controller
             exit('No direct script access allowed');
         }
 
-        $errors = array();
+        $errors = new stdClass();
 
         $user = $this->input->post('nick');
         $passwd = $this->input->post('passwd');
@@ -45,11 +45,10 @@ class Login extends CI_Controller
         $this->form_validation->set_rules('passwd','password','required');
 
         if ($this->form_validation->run() == FALSE){
-           $errors = $this->form_validation->error_array();
+            $errors->success = false;
+            $errors->value = $this->form_validation->error_string();
         }elseif($this->UserModel->check_user_login($user,$passwd)){
-
             $data_user = $this->UserModel->get_data_user_by_nick($user);
-
             $dataUser = array(
                 'id'  => $data_user[0]['id'],
                 'nick'     => $data_user[0]['nick'],
@@ -60,10 +59,12 @@ class Login extends CI_Controller
 
             $this->session->set_userdata($dataUser);
 
-            $errors['login'] = true;
+            $errors->success = true;
+            $errors->value = 'Inicio de session, correctamente :)';
 
         }else{
-            $errors['login'] = false;
+            $errors->success = false;
+            $errors->value = 'Oops... Usuario o contraseña incorrectos.';
         }
 
         echo json_encode($errors);

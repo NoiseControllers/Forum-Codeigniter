@@ -22,7 +22,7 @@
                         <a href="<?= base_url('Forum/topic/'.$topic['id_topic'].'/'.strtolower(url_title(convert_accented_characters($topic['title']))).''); ?>"><?= $topic['title']; ?></a>
                         <br/>
                         <div class="description">
-                            <p>hace <?= timespan($topic['time_topic'],time(),1); ?> por <a href="#"><em style="font-size:14px;"><?= $topic['author']; ?></em></a>.</p>
+                            <p>hace <?= timespan($topic['time_topic'],time(),1); ?> por <a href="<?= base_url('User/profile/'.$topic['author']); ?>"><em style="font-size:14px;"><?= $topic['author']; ?></em></a>.</p>
                         </div>
                     </div>
                     <div class="pull-right">
@@ -37,7 +37,6 @@
                 <?php } ?>
 
             </div>
-
 
         </div>
         <div class="col-md-1"></div>

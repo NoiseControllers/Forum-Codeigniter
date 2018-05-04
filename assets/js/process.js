@@ -1,74 +1,57 @@
 $(function() {
 
-    $("form#login").on("submit", function(e) {
+    $("form#login").submit(function( e ) {
         e.preventDefault();
 
-        var nick = $.trim($("[name=nick]").val());
-        var passwd = $("[name=passwd]").val();
-        var url = $(this).attr('action');
+        let nick = $.trim($("[name=nick]").val());
+        let passwd = $("[name=passwd]").val();
+        let url = $(this).attr('action');
 
-        var formData = {
-            'nick'      :   nick,
-            'passwd'    :   passwd
+        if (nick == '' || passwd== '') {
+            toastr.info('No puedes dejar campos en blanco.');
+            return false;
         }
-
-        if(nick != '' && passwd != ''){
 
             $.ajax({
                 type : "POST",
                 url : url,
-                data : formData,
-                beforeSend : function() {
-
-                },
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData:false,
+                dataType: 'json',
                 success : function(response) {
-                    console.log(response);
-                    var object = $.parseJSON(response);
-
-
-                    if(object.hasOwnProperty('nick')){
-                        toastr.info(object.nick, '¡Oops!');
-                    }
-
-                    if(object.hasOwnProperty('passwd')){
-                        toastr.info(object.passwd, '¡Oops!');
-                    }
-
-                    if(object.login !== true){
-                        toastr.error('Datos Incorrectos.', '¡Oops!');
+                    if (false === response.success) {
+                        $('input[type=password]').val('');
+                        toastr.error(response.value);
                     }else{
-                        toastr.success('Bienvenido :)', '¡Sesion Iniciada!');
+                        $('input[type=submit]').attr('disabled', 'disabled');
+                        toastr.success(response.value);
+                        setTimeout(function(){ location.reload(); }, 2500);
                     }
+                },
+                error: function () {
+                    toastr.error('No se puede completar tu solicitud en este momento. Vuelva a intentarlo más tarde...');
                 }
             });
-
-        }else{
-            toastr.info('Has dejado campos en blanco', '¡Oops!');
-        }
 
 
        //End-Form-login
     });
 
-    $("form#register").on("submit", function(e){
+    $("form#register").submit(function( e ) {
 
         $('input').removeClass('error-input');
         $('p.error-msg').remove();
 
         e.preventDefault();
-        var nick = $.trim($("[name=nick]").val());
-        var passwd = $("[name=passwd]").val();
-        var conf_passwd = $("[name=conf_passwd]").val();
-        var email = $("[name=email]").val();
+        let nick = $.trim($("[name=nick]").val());
+        let passwd = $("[name=passwd]").val();
+        let conf_passwd = $("[name=conf_passwd]").val();
+        let email = $("[name=email]").val();
 
-        var url = $(this).attr('action');
+        let url = $(this).attr('action');
 
-        var formData = {
-            'nick'          : nick,
-            'passwd'        : passwd,
-            'conf_passwd'   : conf_passwd,
-            'email'         : email
-        }
 
         if(nick == '' || passwd == '' || email == ''){
             toastr.info('Has dejado campos en blanco', '¡Oops!');
@@ -78,31 +61,35 @@ $(function() {
             $.ajax({
                 type : "POST",
                 url : url,
-                data : formData,
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData:false,
+                dataType: 'json',
                 success : function(response) {
-                    var object = $.parseJSON(response);
-                    console.log(object);
+                    console.log(response);
 
-                    if(object.hasOwnProperty('nick')){
-                        $("[name=nick]").addClass('error-input').after('<p class="error-msg">'+object.nick+'</p>');
-                    }
-                    if(object.hasOwnProperty('passwd')){
-                        $("[name=passwd]").addClass('error-input').after('<p class="error-msg">'+object.passwd+'</p>');
-                    }
-                    if(object.hasOwnProperty('email')){
-                        $("[name=email]").addClass('error-input').after('<p class="error-msg">'+object.email+'</p>');
-                    }
+                    if (false === response.success) {
 
-                    if(object.register == true){
-                        swal({
-                            type: 'success',
-                            title: '¡Completado!',
-                            text: 'Te has registrado correctamente'
+                        if (response.value.hasOwnProperty('nick')) {
+                            $("[name=nick]").addClass('error-input').after('<p class="error-msg">'+response.value.nick+'</p>');
+                        }
 
-                        })
+                        if (response.value.hasOwnProperty('email')) {
+                            $("[name=email]").addClass('error-input').after('<p class="error-msg">'+response.value.email+'</p>');
+                        }
+
+                        if (response.value.hasOwnProperty('passwd')) {
+                            $("[name=passwd]").addClass('error-input').after('<p class="error-msg">'+response.value.passwd+'</p>');
+                        }
                     }else{
-                        toastr.error('Hubo un error y no se pudo completar el registro.', '¡Oops!');
+                        $('input[type=submit]').attr('disabled', 'disabled');
+                        toastr.success(response.value);
+                        setTimeout(function(){ window.location = base_url+'login'; }, 2500);
                     }
+                },
+                error: function () {
+                    toastr.error('No se puede completar tu solicitud en este momento. Vuelva a intentarlo más tarde...');
                 }
             });
         }
