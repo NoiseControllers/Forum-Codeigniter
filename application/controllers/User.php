@@ -17,11 +17,6 @@ class User extends CI_Controller
         $this->load->helper('text');
     }
 
-    public function Settings()
-    {
-
-    }
-
     /**
      * @param $user
      */

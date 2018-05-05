@@ -60,9 +60,7 @@ class Settings extends CI_Controller
         $id_user = $this->session->id;
 
         $email = $this->input->post('email');
-
         $gender = $this->input->post('gender');
-
         $location = $this->input->post('location');
 
         $this->form_validation->set_rules('email','Correo electronico','trim|xss_clean|valid_email');
@@ -141,13 +139,19 @@ class Settings extends CI_Controller
         $config['remove_spaces']        = true;
 
         $this->load->library('upload', $config);
+
         if ( $this->upload->do_upload('userfile')) {
+
+           if ($this->session->avatar != 'default.png') {
+                unlink('./uploads/users/avatars/'.$this->session->avatar);
+            }
+
             $userData = [
               'avatar' => $this->upload->data('file_name')
             ];
+            $this->session->set_userdata($userData);
 
             $response->success = $this->UserModel->updateProfile($user_id,$userData);
-            $this->session->set_userdata($userData);
             $response->value = 'Cambios guardados correctamente';
             $response->img = base_url('uploads/users/avatars/'.$userData['avatar']);
         }else{
@@ -160,6 +164,8 @@ class Settings extends CI_Controller
 
     public function processUploadHead ()
     {
+        $user = $this->UserModel->get_data_user_by_id($this->session->id);
+
         $response = new stdClass();
 
         $user_id = $this->session->id;
@@ -172,6 +178,10 @@ class Settings extends CI_Controller
         $this->load->library('upload', $config);
 
         if ( $this->upload->do_upload('userfile')) {
+
+            if ($user->img_header != 'default.gif') {
+                unlink('./uploads/users/profile/'.$user->img_header);
+            }
 
             $userData = [
                 'img_header' => $this->upload->data('file_name')

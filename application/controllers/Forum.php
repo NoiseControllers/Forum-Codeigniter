@@ -19,7 +19,7 @@ class Forum extends CI_Controller
         $this->load->helper('date');
         $this->load->helper('text');
 
-        //$this->output->enable_profiler(TRUE);
+        $this->output->enable_profiler(TRUE);
     }
 
     /**
