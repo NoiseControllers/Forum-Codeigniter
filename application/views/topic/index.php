@@ -35,7 +35,7 @@
                         <a href="" class="btn btn-danger pull-right"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                     </div>
                     <div class="body text">
-                        <?= $reply['body']; ?>
+                        <?= nl2br($reply['body']); ?>
                     </div>
                 </div>
                 <?php } ?>
