@@ -53,7 +53,7 @@ class Topic extends CI_Controller
 
     public function reply($id_topic)
     {
-        $errors = array();
+        $errors = new stdClass();
         $topic = $this->topicModel->get_data_topic_by_id($id_topic);
 
         $id_user = $this->session->id;
@@ -62,21 +62,24 @@ class Topic extends CI_Controller
 
         $this->form_validation->set_rules('topic_body','message','required|xss_clean');
 
-        $dataReply = array(
+        $dataReply = [
             'id_topic' => $topic[0]['id_topic'],
             'id_board' => $topic[0]['id_board'],
             'id_user' => $id_user,
             'title' => $title,
             'body' => $body,
             'poster_time' => time()
-        );
+        ];
 
         if($this->form_validation->run() == FALSE){
-            $errors = $this->form_validation->error_array();
+            $errors->success = false;
+            $errors->value = $this->form_validation->error_string();
         }elseif($this->topicModel->add_reply($dataReply)){
-            $errors['error'] = false;
+            $errors->succes = true;
+            $errors->value = 'Tu respuesta ha sido publicada.';
         }else{
-            $errors['error'] = true;
+            $errors->success = false;
+            $errors->value = 'No se puede completar tu solicitud en este momento. Vuelva a intentarlo más tarde...';
         }
 
         echo json_encode($errors);
@@ -109,7 +112,6 @@ class Topic extends CI_Controller
         }elseif($this->topicModel->updateMessageTopic($id_msg, $newDataMessage)){
             $errors->success = true;
             $errors->value = 'Cambios Guardados correctamente';
-            $errors->url = base_url('Forum/topic/');
         }else{
             $errors->success = false;
             $errors->value = 'No se pudo completar su solicitud en estos momentos.';

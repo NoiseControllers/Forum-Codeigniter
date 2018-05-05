@@ -58,6 +58,7 @@ $(function() {
     $('form#topicEdit').submit(function( e ) {
         e.preventDefault();
         let action = $(this).attr('action');
+        let topicUrl = $('#cancel').attr('href');
 
         $.ajax({
             type: "POST",
@@ -70,11 +71,17 @@ $(function() {
             success: function (response) {
                 console.log(response);
 
-                if (true === response.success) {
-                    toastr.success(response.value);
+                if (false === response.success) {
+                    toastr.error(response.value);
                     return false;
                 }
-                toastr.error(response.value);
+
+                toastr.success(response.value);
+                $('button[type=submit]').attr('disabled','disabled');
+                setTimeout(function(){
+                    window.location = decodeURI(topicUrl);
+                }, 2000);
+
             },
             error: function () {
                 toastr.error('No se puede completar tu solicitud en este momento. Vuelva a intentarlo más tarde...');
@@ -122,6 +129,47 @@ $(function() {
                     });
                 }
             });
+    });
+
+    $('form#reply').submit(function (e) {
+       e.preventDefault();
+
+       let msg = $('textarea#topic_reply').val();
+       let url = $(this).attr('action');
+       let topicUrl = $('textarea#topic_reply + a').attr('href');
+
+       if ( '' == msg) {
+           toastr.error('No puedes dejar un comentario vacio.');
+           return false;
+       }
+
+       $.ajax ({
+           type: 'POST',
+           url: url,
+           data: new FormData(this),
+           contentType: false,
+           cache: false,
+           processData:false,
+           dataType: 'json',
+           success: function (response) {
+                console.log(response);
+               if (false === response.success) {
+                   toastr.error(response.value);
+                   return false;
+               }
+
+               toastr.success(response.value);
+               $('button[type=submit]').attr('disabled','disabled');
+               setTimeout(function(){
+                   window.location = decodeURI(topicUrl);
+               }, 2000);
+
+           },
+           error: function () {
+               toastr.error('No se puede completar tu solicitud en este momento. Vuelva a intentarlo más tarde...');
+           }
+
+       })
 
     });
 

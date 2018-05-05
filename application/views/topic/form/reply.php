@@ -31,7 +31,7 @@
                             </div>
                         </div>
                         <textarea name="topic_body" id="topic_reply" style="height: 250px;margin: 8px 0 8px 0;resize: vertical;" class="form-control" placeholder="Escriba el mensaje" ><?php if(array_key_exists('quote',$topic)) echo $topic['quote']; ?></textarea>
-                        <a href="<?= base_url('Forum/topic/'.$topic[0]['id_topic'].'/'.$topic[0]['title'].''); ?>" class="btn btn-danger pull-left">Cancelar</a>
+                        <a href="<?= base_url('Forum/topic/'.$topic[0]['id_topic'].'/'.strtolower(url_title(convert_accented_characters($topic[0]['title'])))); ?>" class="btn btn-danger pull-left">Cancelar</a>
                         <div class="btn-group pull-right">
                             <a href="#" class="btn grey">Previsualizar</a>
                             <button type="submit" class="btn btn-success">Responder</button>
