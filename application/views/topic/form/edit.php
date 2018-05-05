@@ -13,7 +13,7 @@
                 <div class="body">
                     <form id="topicEdit" method="post" action="<?= base_url('topic/processEdit') ?>" >
                         <?php if(1 === $isTopic) { ?>
-                        <input type="text" name="topic_title" class="form-control" placeholder="Escriba un asunto..." value="<?= strtolower(url_title(convert_accented_characters($message[0]['title']))); ?>" >
+                        <input type="text" name="topic_title" class="form-control" placeholder="Escriba un asunto..." value="<?= $message[0]['title']; ?>" >
 
                         <?php  } ?>
                         <div class="bbcode">
