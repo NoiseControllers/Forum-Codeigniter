@@ -119,6 +119,9 @@ $(function() {
                            console.log(response);
                             if (true === response.success){
                                 swal("¡Cerrado!", response.value, "success");
+                                setTimeout( function () {
+                                    location.reload();
+                                }, 2000);
                                 return false;
                             }
                             toastr.error(response.value);

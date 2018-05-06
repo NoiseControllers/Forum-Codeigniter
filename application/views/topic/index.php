@@ -5,7 +5,7 @@
             <div id="content">
                 <div class="btn-group">
                     <a href="<?= base_url('Forum/board/'.$breadcrumb[0]['id_board'].'') ?>" class="btn btn-default grey"><?= $breadcrumb[0]['board']; ?></a>
-                    <a href="#" class="btn btn-default grey on"><?= $replies[0]['title']; ?></a>
+                    <a id="url_topic" href="<?= base_url('Forum/topic/'.$replies[0]['id_topic'].'/'.strtolower(url_title(convert_accented_characters($replies[0]['title'])))); ?>" class="btn btn-default grey on"><?= $replies[0]['title']; ?></a>
                 </div>
                 <div class="btn-group pull-right">
                     <a href="#" class="btn grey" style="padding: 9px 12px;"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
