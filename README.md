@@ -10,8 +10,8 @@ List of tasks for basic operation
 - [x] Board 90%
 - [ ] CRUD topic 90%
 - [ ] CRUD reply 90%
-- [ ] Pagination replies topic
-- [ ] Pagination topics in boards
+- [x] Pagination replies topic
+- [x] Pagination topics in boards
 - [x] Profile 95%
 - [x] Settings 100%
 - [ ] Private message
