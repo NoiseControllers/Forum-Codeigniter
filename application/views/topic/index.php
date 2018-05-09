@@ -8,7 +8,7 @@
                     <a id="url_topic" href="<?= base_url('Forum/topic/'.$replies[0]['id_topic'].'/'.strtolower(url_title(convert_accented_characters($replies[0]['title'])))); ?>" class="btn btn-default grey on"><?= $replies[0]['title']; ?></a>
                 </div>
                 <div class="btn-group pull-right">
-                    <a href="#" class="btn grey" style="padding: 9px 12px;"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                    <?php echo $this->pagination->create_links(); ?>
                 </div>
                 <div class="btn-group pull-right">
                     <a class="btn indigo" href="<?= base_url('Forum/reply/'.$replies[0]['id_topic'].''); ?>"><i class="fa fa-plus-circle" aria-hidden="true"></i><span> Responder</span></a>

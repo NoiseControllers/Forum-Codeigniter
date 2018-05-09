@@ -18,15 +18,25 @@ class topicModel extends CI_Model
      * @param $id_topic
      * @return mixed
      */
-    public function get_topic_by_id($id_topic)
+    public function get_topic_by_id($id_topic,$per_page,$offset)
     {
         $this->db->select('topics.id_topic,messages.id_msg,topics.id_board,topics.locked,users.nick AS author, users.avatar,messages.title, messages.body, messages.poster_time, messages.modified_time');
         $this->db->from('topics');
         $this->db->where('topics.id_topic='.$id_topic.'');
         $this->db->join('messages','messages.id_topic = topics.id_topic','INNER');
         $this->db->join('users','users.id=messages.id_user','INNER');
+        $this->db->limit($per_page, $offset);
 
         return $this->db->get()->result_array();
+    }
+
+    public function getAllRowsByTopicId($id_topic)
+    {
+        $this->db->select('messages.id_topic');
+        $this->db->from('messages');
+        $this->db->where("messages.id_topic=$id_topic");
+
+        return $this->db->get()->num_rows();
     }
 
     public function get_data_topic_by_id($id_topic)

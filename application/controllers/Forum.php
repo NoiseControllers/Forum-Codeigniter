@@ -18,6 +18,7 @@ class Forum extends CI_Controller
         $this->load->model('topic/topicModel');
         $this->load->helper('date');
         $this->load->helper('text');
+        $this->load->library('pagination');
 
         $this->output->enable_profiler(FALSE);
     }
@@ -33,9 +34,22 @@ class Forum extends CI_Controller
     /**
      * @param $id_cat
      */
-    public function board($id_cat)
+    public function board($id_cat,$offset=0)
     {
-        $data['topics'] = $this->BoardModel->get_all_topics_by_category($id_cat);
+        $per_page = 10;
+        $config['base_url'] = base_url("Forum/board/$id_cat/");
+
+        $config['per_page'] = $per_page;
+        $config['display_pages'] = FALSE;
+        $config['total_rows'] = $this->BoardModel->getAllRowsByCategory($id_cat);
+        $config['next_link'] = '<i class="fa fa-arrow-right" aria-hidden="true"></i>';
+        $config['prev_link'] = '<i class="fa fa-arrow-left" aria-hidden="true"></i>';
+        $config['first_link'] = '<i class="fa fa-step-backward" aria-hidden="true"></i>';
+        $config['last_link'] = '<i class="fa fa-step-forward" aria-hidden="true"></i>';
+        $config['attributes'] = array('class' => 'btn grey', 'style' => 'padding: 9px 12px;');
+        $this->pagination->initialize($config);
+
+        $data['topics'] = $this->BoardModel->get_all_topics_by_category($id_cat,$per_page,$offset);
         $data['breadcrumb'] = $this->BoardModel->get_category_and_board_name($id_cat);
 
         $this->load->view('template/Head');
@@ -47,10 +61,25 @@ class Forum extends CI_Controller
     /**
      * @param $id
      * @param $slug
+     * @param int $offset
      */
-    public function topic($id, $slug)
+    public function topic($id, $slug,$offset=0)
     {
-        $data['replies'] = $this->topicModel->get_topic_by_id($id);
+        /*Config Pagination*/
+        $per_page = 10;
+        $config['base_url'] = base_url("Forum/topic/$id/$slug/");
+        $config['per_page'] = $per_page;
+        $config['display_pages'] = FALSE;
+        $config['total_rows'] = $this->topicModel->getAllRowsByTopicId($id);
+        $config['next_link'] = '<i class="fa fa-arrow-right" aria-hidden="true"></i>';
+        $config['prev_link'] = '<i class="fa fa-arrow-left" aria-hidden="true"></i>';
+        $config['first_link'] = '<i class="fa fa-step-backward" aria-hidden="true"></i>';
+        $config['last_link'] = '<i class="fa fa-step-forward" aria-hidden="true"></i>';
+        $config['attributes'] = array('class' => 'btn grey', 'style' => 'padding: 9px 12px;');
+        $this->pagination->initialize($config);
+        /* End Config Pagination*/
+
+        $data['replies'] = $this->topicModel->get_topic_by_id($id,$per_page,$offset);
         $data['breadcrumb'] = $this->BoardModel->get_category_and_board_name($data['replies'][0]['id_board']);
 
         $this->load->view('template/Head');

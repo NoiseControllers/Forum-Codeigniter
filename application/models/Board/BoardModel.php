@@ -35,7 +35,7 @@ class BoardModel extends CI_Model
      * @param $id_cat
      * @return mixed
      */
-    public function get_all_topics_by_category($id_cat)
+    public function get_all_topics_by_category($id_cat,$per_page,$offset)
     {
         $this->db->select('topics.id_topic, topics.num_replies, topics.locked, messages.title, users.nick AS author, messages.poster_time AS time_topic, user_last.nick AS last_user_msg, last_msg.poster_time AS last_poster_msg');
         $this->db->from('topics');
@@ -45,8 +45,18 @@ class BoardModel extends CI_Model
         $this->db->join('users AS user_last','user_last.id = last_msg.id_user','INNER');
         $this->db->where("topics.id_board = $id_cat");
         $this->db->order_by('last_msg.poster_time DESC');
+        $this->db->limit($per_page, $offset);
 
         return $this->db->get()->result_array();
+    }
+
+    public function getAllRowsByCategory($id_cat)
+    {
+        $this->db->select('topics.id_topic');
+        $this->db->from('topics');
+        $this->db->where("topics.id_board = $id_cat");
+
+        return $this->db->get()->num_rows();
     }
 
     /**

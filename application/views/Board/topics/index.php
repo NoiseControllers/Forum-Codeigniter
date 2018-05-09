@@ -8,7 +8,7 @@
                     <a href="<?= base_url('Forum/board/'.$breadcrumb[0]['id_board'].''); ?>" class="btn btn-default grey on"><?= $breadcrumb[0]['board']; ?></a>
                 </div>
                 <div class="btn-group pull-right">
-                    <a href="#" class="btn grey" style="padding: 9px 12px;"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                    <?php echo $this->pagination->create_links(); ?>
                 </div>
                 <div class="btn-group pull-right">
                     <a class="btn indigo" href="<?= base_url('Forum/post/'.$breadcrumb['0']['id_board'].''); ?>"><i class="fa fa-plus-circle" aria-hidden="true"></i><span> Nuevo tema</span></a>
