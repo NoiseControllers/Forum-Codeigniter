@@ -65,6 +65,10 @@ class Forum extends CI_Controller
      */
     public function topic($id, $slug,$offset=0)
     {
+        $this->load->library('bbcode');
+        $bbcode = new bbcode();
+
+        $data['bbcode'] = $bbcode;
         /*Config Pagination*/
         $per_page = 10;
         $config['base_url'] = base_url("Forum/topic/$id/$slug/");
