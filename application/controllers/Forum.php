@@ -113,7 +113,7 @@ class Forum extends CI_Controller
         $quote = $this->topicModel->get_message_by_id_msg($id_msg);
 
         if(count($quote) != 0){
-            $bbcode_quote = '[quote author='.$quote[0]['nick'].']'.$quote[0]['body'].'[/quote]';
+            $bbcode_quote = '[quote="'.$quote[0]['nick'].'"]'.$quote[0]['body'].'[/quote]';
             $data['topic']['quote'] = $bbcode_quote;
         }
 
