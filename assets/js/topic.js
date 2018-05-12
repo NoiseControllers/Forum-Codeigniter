@@ -1,5 +1,4 @@
 $(function() {
-
     $("form#topic").on("submit", function(e) {
         e.preventDefault();
 
@@ -177,3 +176,42 @@ $(function() {
     });
 
 });
+
+function addTag(e, t) {
+    let n = document.getElementById(e),
+        a = "[" + t + "]",
+        o = "[/" + t + "]";
+    if (document.selection) {
+        n.focus();
+        var s = document.selection.createRange();
+        s.text = a + s.text + o
+    } else if (n.selectionStart || "0" == n.selectionStart) {
+        let r = n.value.substring(0, n.selectionStart);
+        if (o) {
+            let c = r + a + n.value.substring(n.selectionStart, n.selectionEnd);
+            n.value = c + o + n.value.substring(n.selectionEnd, n.textLength), setCaretPosition(n, c.length)
+        } else n.value = r + a + n.value.substring(n.selectionStart, n.textLength), setCaretPosition(n, r.length + a.length)
+    } else n.value = a + o, setCaretPosition(n, a.length + o.length)
+}
+function setCaretPosition(e, t) {
+    if (null != e)
+        if (e.createTextRange) {
+            var i = e.createTextRange();
+            i.move("character", t), i.select()
+        } else e.selectionStart ? (e.focus(), e.setSelectionRange(t, t)) : e.focus()
+}
+
+function toggleSpoiler(btn)
+{
+    let txt_show = $(btn).attr('data-text-show');
+    let txt_hide = $(btn).attr('data-text-hide');
+    let div = $(btn).next();
+
+    if (div.attr('style') == 'display: none;') {
+        div.css('display','block');
+        $(btn).text(txt_hide);
+    }else{
+        div.css('display','none');
+        $(btn).text(txt_show);
+    }
+}

@@ -7,11 +7,15 @@
  */
 
 class bbcode {
+    protected $CI;
+    private $url;
     private $bbcode = [];
 
     public function __construct()
     {
 
+        $this->CI =& get_instance();
+        $this->url = $this->CI->get_instance()->config->base_url('User/profile/');
         $this->bbcode["/\[b\](.*?)\[\/b\]/is"] = function ($match) {
             return "<strong>$match[1]</strong>";
         };
@@ -40,6 +44,10 @@ class bbcode {
             return '<p style="text-align:right;">' . $match[1] . '</p>';
         };
 
+        $this->bbcode["/\[justify\](.*?)\[\/justify\]/is"] = function ($match) {
+            return '<p style="text-align:justify;">' . $match[1] . '</p>';
+        };
+
         $this->bbcode["/\[img\](.*?)\[\/img\]/is"] = function ($match) {
             return "<img src=\"$match[1]\"/>";
         };
@@ -53,11 +61,24 @@ class bbcode {
         };
 
         $this->bbcode["/\[quote\](.*?)\[\/quote\]/is"] = function ($match) {
-            return "<blockquote><p>$match[1]</p></blockquote>";
+            //return "<blockquote><p>$match[1]</p></blockquote>";
+            return "<blockquote class=\"quote\"> 
+            <div class=\"quote-body\">$match[1]</div>
+            </blockquote>";
         };
 
         $this->bbcode["/\[quote=\"([^\"]+)\"\](.*?)\[\/quote\]/is"] = function ($match) {
-            return "$match[1]: <blockquote><p>$match[2]</p></blockquote>";
+            return "<blockquote class=\"quote\"> 
+            <div class=\"quote-head\"><a href=\"$this->url$match[1]\">@$match[1]</a></div>
+            <div class=\"quote-body\">$match[2]</div>
+            </blockquote>";
+        };
+
+        $this->bbcode["/\[spoiler\](.*?)\[\/spoiler\]/is"] = function ($match) {
+            return "<div class=\"spoiler\"> 
+            <button type=\"button\" class=\"btn btn-default grey spoiler-button\" onclick=\"toggleSpoiler(this)\" data-text-show=\"Mostrar contenido\" data-text-hide=\"Ocultar contenido\">Mostrar contenido</button>
+            <div class=\"spoiler-content\" id=\"spoiler-content\" style=\"display: none;\"> $match[1] </div>
+            </div>";
         };
 
     }
