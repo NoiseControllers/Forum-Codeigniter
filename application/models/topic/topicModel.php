@@ -20,11 +20,17 @@ class topicModel extends CI_Model
      */
     public function get_topic_by_id($id_topic,$per_page,$offset)
     {
-        $this->db->select('topics.id_topic,messages.id_msg,topics.id_board,topics.locked,users.nick AS author, users.avatar,messages.title, messages.body, messages.poster_time, messages.modified_time');
+        $this->db->select('topics.id_topic,messages.id_msg,topics.id_board,topics.locked,
+        users.nick AS author, users.avatar,messages.title, 
+        messages.id_user, messages.body, messages.poster_time, messages.modified_time,
+        users_groups.name AS group_name, users_groups.color AS group_color
+        ');
         $this->db->from('topics');
         $this->db->where('topics.id_topic='.$id_topic.'');
         $this->db->join('messages','messages.id_topic = topics.id_topic','INNER');
         $this->db->join('users','users.id=messages.id_user','INNER');
+        $this->db->join('users_groups','users_groups.id_group=users.rol','INNER');
+        $this->db->order_by('messages.id_msg ASC');
         $this->db->limit($per_page, $offset);
 
         return $this->db->get()->result_array();
@@ -137,6 +143,11 @@ class topicModel extends CI_Model
     {
         $this->db->where('id_topic', $id_topic);
         return $this->db->update('topics', $newDataTopic);
+    }
+
+    public function topicExist($id_topic)
+    {
+        return $this->db->get_where('topics',"id_topic='$id_topic'")->num_rows();
     }
 
     private function incrementNumReplies($id_topic)

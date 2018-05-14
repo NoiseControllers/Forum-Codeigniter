@@ -23,7 +23,7 @@
                         <ul class="list-group">
                             <li class="list-group-item"><i class="fa fa-map-marker" aria-hidden="true"></i> <?= (is_null($user[0]['location'])) ? "Desconocida " : $user[0]['location']; ?></li>
                             <li class="list-group-item"><i class="fa fa-clock-o" aria-hidden="true"></i> Miembro desde hace <?= timespan($user[0]['date_registered'],time(),1); ?></li>
-                            <li class="list-group-item"><i class="fa fa-tag" aria-hidden="true"></i> Usuario</li>
+                            <li class="list-group-item"><i class="fa fa-tag" aria-hidden="true"></i> <?= $user[0]['group_name']; ?></li>
                             <li class="list-group-item"><i class="fa fa-comments-o" aria-hidden="true"></i> <?= $totalMessages[0]['totalMessages']; ?> mensajes publicados en el foro</li>
                             <li class="list-group-item"><i class="fa fa-book" aria-hidden="true"></i> <?= $totalTopics[0]['totalTopics']; ?> temas en el foro</li>
                             <li class="list-group-item"><i class="fa fa-heartbeat" aria-hidden="true"></i> Última conexión hace <?= timespan($user[0]['last_login'],time(),1); ?></li>

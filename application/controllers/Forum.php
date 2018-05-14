@@ -19,8 +19,12 @@ class Forum extends CI_Controller
         $this->load->helper('date');
         $this->load->helper('text');
         $this->load->library('pagination');
+        $this->load->library('ErrorShow');
 
-        $this->output->enable_profiler(FALSE);
+        if (TRUE !== $this->session->logged) {
+            $this->session->set_userdata('logged', FALSE);
+        }
+        $this->output->enable_profiler(false);
     }
 
     /**
@@ -33,9 +37,17 @@ class Forum extends CI_Controller
 
     /**
      * @param $id_cat
+     * @param int $offset
+     * @return bool if not exist board
      */
-    public function board($id_cat,$offset=0)
+    public function board($id_cat=0, $offset=0)
     {
+
+       if (0 === $this->BoardModel->boardExist($id_cat)) {
+            $this->errorshow->showError('boardNoExist');
+            return false;
+        }
+
         $per_page = 10;
         $config['base_url'] = base_url("Forum/board/$id_cat/");
 
@@ -59,12 +71,17 @@ class Forum extends CI_Controller
     }
 
     /**
-     * @param $id
-     * @param $slug
+     * @param int $id
+     * @param null $slug
      * @param int $offset
+     * @return bool if topic not exist
      */
-    public function topic($id, $slug,$offset=0)
+    public function topic($id=0, $slug=null, $offset=0)
     {
+        if (0 === $this->topicModel->topicExist($id)) {
+            $this->errorshow->showError('topicNoExist');
+            return false;
+        }
         $this->load->library('bbcode');
         $bbcode = new bbcode();
 
@@ -147,6 +164,13 @@ class Forum extends CI_Controller
         $this->load->view('Board/index', $data);
         $this->load->view('template/Footer');
 
+    }
+
+    public function test()
+    {
+        $this->load->library('ErrorShow');
+
+        $this->errorshow->showError();
     }
 
 }

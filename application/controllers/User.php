@@ -15,13 +15,21 @@ class User extends CI_Controller
         $this->load->model('User/likesModel');
         $this->load->helper('date');
         $this->load->helper('text');
+        $this->load->library('ErrorShow');
     }
+
 
     /**
      * @param $user
+     * @return bool if users not exist
      */
     public function Profile($user)
     {
+       if (0 === $this->UserModel->userExist($user) ) {
+            $this->errorshow->showError('userNotFound');
+            return false;
+        }
+
         $data['user'] = $this->UserModel->get_data_user_by_nick($user);
         $data['last_activity'] = $this->UserModel->get_last_activity_by_id_user($data['user'][0]['id']);
         $data['totalTopics'] = $this->UserModel->get_the_total_of_topics_by_user($data['user'][0]['id']);

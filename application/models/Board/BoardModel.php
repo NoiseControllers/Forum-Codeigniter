@@ -72,4 +72,9 @@ class BoardModel extends CI_Model
 
         return $this->db->get()->result_array();
     }
+
+    public function boardExist($id_board)
+    {
+        return $this->db->get_where('boards',"id='$id_board'")->num_rows();
+    }
 }

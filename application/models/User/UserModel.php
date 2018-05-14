@@ -68,9 +68,10 @@ class UserModel extends CI_Model
      */
     public function get_data_user_by_nick($user)
     {
-        $this->db->select('*');
+        $this->db->select('users.*, users_groups.name AS group_name');
         $this->db->from('users');
         $this->db->where('nick',$user);
+        $this->db->join('users_groups','users_groups.id_group=users.rol','INNER');
 
         return $this->db->get()->result_array();
     }
@@ -140,6 +141,11 @@ class UserModel extends CI_Model
     public function aUserExists($id_user)
     {
         return $this->db->get_where('users',"id=$id_user")->num_rows();
+    }
+
+    public function userExist($nick)
+    {
+        return $this->db->get_where('users',"nick='$nick'")->num_rows();
     }
 
     public function updateProfile($id_user,$userdata)
