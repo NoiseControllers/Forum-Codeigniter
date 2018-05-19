@@ -37,7 +37,7 @@
                             <?php
 
                                 foreach($last_activity as $activity){
-                                    echo '<li class="list-group-item"><a href="'.base_url('Forum/topic/'.$activity['id_topic'].'/'.strtolower(url_title(convert_accented_characters($activity['title'])))).'">'.$activity['title'].'</a> hace '.timespan($activity['poster_time'],time(),1).'</li>';
+                                    echo '<li class="list-group-item"><a href="'.base_url('Forum/topic/'.$activity['id_topic'].'/'.strtolower(url_title(convert_accented_characters(str_replace('RE: ','',$activity['title']))))).'">'.$activity['title'].'</a> hace '.timespan($activity['poster_time'],time(),1).'</li>';
                                 }
                             ?>
                         </ul>
