@@ -16,6 +16,7 @@ class Forum extends CI_Controller
         parent::__construct();
         $this->load->model('Board/BoardModel');
         $this->load->model('topic/topicModel');
+        $this->load->model('User/Permissions');
         $this->load->helper('date');
         $this->load->helper('text');
         $this->load->library('pagination');
@@ -24,7 +25,6 @@ class Forum extends CI_Controller
         if (TRUE !== $this->session->logged) {
             $this->session->set_userdata('logged', FALSE);
         }
-        $this->output->enable_profiler(false);
     }
 
     /**
@@ -63,6 +63,7 @@ class Forum extends CI_Controller
 
         $data['topics'] = $this->BoardModel->get_all_topics_by_category($id_cat,$per_page,$offset);
         $data['breadcrumb'] = $this->BoardModel->get_category_and_board_name($id_cat);
+        $data['permissions'] = $this->Permissions->permissions($this->session->rol);
 
         $this->load->view('template/Head');
         $this->load->view('Board/topics/index',$data);
@@ -102,6 +103,7 @@ class Forum extends CI_Controller
 
         $data['replies'] = $this->topicModel->get_topic_by_id($id,$per_page,$offset);
         $data['breadcrumb'] = $this->BoardModel->get_category_and_board_name($data['replies'][0]['id_board']);
+        $data['permissions'] = $this->Permissions->permissions($this->session->rol);
 
         $this->load->view('template/Head');
         $this->load->view('topic/index', $data);
@@ -110,9 +112,15 @@ class Forum extends CI_Controller
 
     /**
      * @param $id_board
+     * @return bool if not logged
      */
     public function post($id_board)
     {
+        if (false === $this->session->logged) {
+            $this->errorshow->showError('notLogin');
+            return false;
+        }
+
         $data['breadcrumb'] = $this->BoardModel->get_category_and_board_name($id_board);
 
         $this->load->view('template/Head');
@@ -120,13 +128,22 @@ class Forum extends CI_Controller
         $this->load->view('template/Footer');
     }
 
-    /**
-     * @param $id_topic
-     * @param int $id_msg
-     */
+
     public function reply($id_topic, $id_msg=0)
     {
+        if (false === $this->session->logged) {
+            $this->errorshow->showError('notLogin');
+            return false;
+        }
+
         $data['topic'] = $this->topicModel->get_data_topic_by_id($id_topic);
+        $permissions = $this->Permissions->permissions($this->session->rol);
+
+        if (1 == $data['topic'][0]['locked'] && 0 == $permissions->reply_any) {
+            $this->errorshow->showError('closedTopic');
+            return false;
+        }
+
         $quote = $this->topicModel->get_message_by_id_msg($id_msg);
 
         if(count($quote) != 0){
@@ -141,16 +158,25 @@ class Forum extends CI_Controller
 
     public function edit($id_msg)
     {
+        if (false === $this->session->logged) {
+            $this->errorshow->showError('notLogin');
+            return false;
+        }
         $id_user = $this->session->id;
-
+        $permissions = $this->Permissions->permissions($this->session->rol);
         $data['message'] = $this->topicModel->get_message_by_id_msg($id_msg);
         $data['isTopic'] = $this->topicModel->isTopicAndOwned($id_msg,$id_user);
 
-        $this
-            ->load
-            ->view('template/Head')
-            ->view('topic/form/edit', $data)
-            ->view('template/Footer');
+        if ($data['message'][0]['id_user'] === $this->session->id && $permissions->modify_own || $permissions->modify_any) {
+            $this
+                ->load
+                ->view('template/Head')
+                ->view('topic/form/edit', $data)
+                ->view('template/Footer');
+            return false;
+        }
+
+        $this->errorshow->showError('notPermissions');
     }
 
     /**
@@ -164,13 +190,6 @@ class Forum extends CI_Controller
         $this->load->view('Board/index', $data);
         $this->load->view('template/Footer');
 
-    }
-
-    public function test()
-    {
-        $this->load->library('ErrorShow');
-
-        $this->errorshow->showError();
     }
 
 }

@@ -26,7 +26,7 @@
                             <li class="list-group-item"><i class="fa fa-tag" aria-hidden="true"></i> <?= $user[0]['group_name']; ?></li>
                             <li class="list-group-item"><i class="fa fa-comments-o" aria-hidden="true"></i> <?= $totalMessages[0]['totalMessages']; ?> mensajes publicados en el foro</li>
                             <li class="list-group-item"><i class="fa fa-book" aria-hidden="true"></i> <?= $totalTopics[0]['totalTopics']; ?> temas en el foro</li>
-                            <li class="list-group-item"><i class="fa fa-heartbeat" aria-hidden="true"></i> Última conexión hace <?= timespan($user[0]['last_login'],time(),1); ?></li>
+                            <li class="list-group-item"><i class="fa fa-heartbeat" aria-hidden="true"></i> Última conexión <?= (is_null($user[0]['last_login'])) ? 'Nunca' : 'hace '.timespan($user[0]['last_login'],time(),1); ?></li>
                         </ul>
                     </div>
                 </div>
@@ -35,13 +35,21 @@
                         <div class="panel-heading" style="border-bottom: 2px solid #b19cd9;">Ultima actividad <i class="fa fa-comment pull-right" aria-hidden="true"></i></div>
                         <ul class="list-group">
                             <?php
+
                                 foreach($last_activity as $activity){
                                     echo '<li class="list-group-item"><a href="'.base_url('Forum/topic/'.$activity['id_topic'].'/'.strtolower(url_title(convert_accented_characters($activity['title'])))).'">'.$activity['title'].'</a> hace '.timespan($activity['poster_time'],time(),1).'</li>';
                                 }
                             ?>
                         </ul>
+                        <?php
+                            if (0 === count($last_activity)) {
+                                echo '
+                                    <div class="alert alert-warning">
+                                        Este usuario todavia no tiene actividad :(
+                                    </div>';
+                            }
+                        ?>
                     </div>
-
                 </div>
             </div>
         </div>

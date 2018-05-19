@@ -13,8 +13,12 @@ class Topic extends CI_Controller
         parent::__construct();
         $this->load->helper('form');
         $this->load->library('form_validation');
-
         $this->load->model('topic/topicModel');
+
+        if (false === $this->session->logged) {
+            redirect(base_url());
+        }
+
     }
 
     public function processTopic()
@@ -40,10 +44,12 @@ class Topic extends CI_Controller
 
         if ($this->form_validation->run() == FALSE) {
             $errors = $this->form_validation->error_array();
-        }elseif($this->topicModel->add_post($dataMessages) != '-1'){
+        }
+        elseif($this->topicModel->add_post($dataMessages) != '-1') {
             $errors['error'] = false;
             $errors['url'] = base_url('Forum/board/'.$id_board.'');
-        }else{
+        }
+        else {
             $errors['error'] = true;
         }
 
@@ -71,13 +77,19 @@ class Topic extends CI_Controller
             'poster_time' => time()
         ];
 
-        if($this->form_validation->run() == FALSE){
+        if($this->form_validation->run() == FALSE) {
             $errors->success = false;
             $errors->value = $this->form_validation->error_string();
-        }elseif($this->topicModel->add_reply($dataReply)){
+        }
+        elseif(1 === $topic[0]['locked']) {
+            $errors->success = false;
+            $errors->value = 'El tema no acepta nuevas respuestas.';
+        }
+        elseif($this->topicModel->add_reply($dataReply)) {
             $errors->succes = true;
             $errors->value = 'Tu respuesta ha sido publicada.';
-        }else{
+        }
+        else {
             $errors->success = false;
             $errors->value = 'No se puede completar tu solicitud en este momento. Vuelva a intentarlo más tarde...';
         }
@@ -104,7 +116,6 @@ class Topic extends CI_Controller
         if( !null == $title_msg ) {
            $newDataMessage['title'] = $title_msg;
         }
-
 
         if($this->form_validation->run() == FALSE){
             $errors->success = false;

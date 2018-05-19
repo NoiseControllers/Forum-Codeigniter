@@ -12,7 +12,7 @@
                 </div>
                 <div class="btn-group pull-right">
                     <?php
-                        if (TRUE === $this->session->logged) {
+                        if (TRUE === $this->session->logged && $permissions->post_new) {
                             echo '<a class="btn indigo" href="'.base_url('Forum/post/'.$breadcrumb['0']['id_board']).'"><i class="fa fa-plus-circle" aria-hidden="true"></i><span> Nuevo tema</span></a>';
                         }
                     ?>

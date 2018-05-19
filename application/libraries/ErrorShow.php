@@ -33,6 +33,12 @@ class ErrorShow
             case 'notPermissions':
                 return 'No tienes los permisos suficientes para realizar dicha acción.';
                 break;
+            case 'closedTopic':
+                return 'El tema se encuentra cerrado.';
+                break;
+            case 'notLogin':
+                return 'Debe iniciar sesion primero o registrarse una cuenta nueva.';
+                break;
             default:
                 return 'Desconocemos el error, se ha informado a nuestros programadores.';
         }

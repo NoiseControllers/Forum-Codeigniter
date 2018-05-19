@@ -28,11 +28,9 @@ class UserModel extends CI_Model
     {
         $this->db->select('passwd');
         $this->db->where('nick',$user);
-
         $hash = $this->db->get('users')->row('passwd');
 
         return $this->check_user_hash_password($user,$passwd,$hash);
-
     }
 
     /**
@@ -63,14 +61,16 @@ class UserModel extends CI_Model
         $execute = $this->db->update('users');
     }
 
+
     /**
      * @param $user
+     * @return mixed
      */
     public function get_data_user_by_nick($user)
     {
         $this->db->select('users.*, users_groups.name AS group_name');
         $this->db->from('users');
-        $this->db->where('nick',$user);
+        $this->db->where('users.nick',$user);
         $this->db->join('users_groups','users_groups.id_group=users.rol','INNER');
 
         return $this->db->get()->result_array();
@@ -138,22 +138,40 @@ class UserModel extends CI_Model
         return $this->db->get()->result_array();
     }
 
+    /**
+     * @param $id_user
+     * @return mixed
+     */
     public function aUserExists($id_user)
     {
         return $this->db->get_where('users',"id=$id_user")->num_rows();
     }
 
+    /**
+     * @param $nick
+     * @return mixed
+     */
     public function userExist($nick)
     {
         return $this->db->get_where('users',"nick='$nick'")->num_rows();
     }
 
-    public function updateProfile($id_user,$userdata)
+    /**
+     * @param $id_user
+     * @param $userdata
+     * @return mixed
+     */
+    public function updateProfile($id_user, $userdata)
     {
         $this->db->where('id', $id_user);
         return $this->db->update('users', $userdata);
     }
 
+    /**
+     * @param $id_user
+     * @param $password
+     * @return mixed
+     */
     public function passwordChange($id_user, $password)
     {
         $hash = password_hash($password, PASSWORD_DEFAULT);
@@ -162,4 +180,5 @@ class UserModel extends CI_Model
         $this->db->where('id', $id_user);
         return $this->db->update('users');
     }
+
 }

@@ -58,7 +58,7 @@ class Register extends CI_Controller
             'passwd'            => password_hash($passwd,PASSWORD_DEFAULT),
             'email'             => $email,
             'date_registered'   => time(),
-            'rol'               =>  '0'
+            'rol'               =>  '3' //3 usuario
         );
 
         if ($this->form_validation->run() == FALSE){

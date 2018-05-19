@@ -37,15 +37,15 @@
                                     echo '<a href="'.base_url('Forum/reply/'.$reply['id_topic'].'/'.$reply['id_msg'].'').'" class="btn btn-primary pull-right"><i class="fa fa-reply" aria-hidden="true"></i></a>';
                                 }
 
-                                if ($reply['id_user'] === $this->session->id) {
+                                if ($reply['id_user'] === $this->session->id && $permissions->modify_own || $permissions->modify_any) {
                                     echo '<a href="'.base_url('Forum/edit/'.$reply['id_msg']).'" class="btn btn-warning pull-right"><i class="fa fa-pencil" aria-hidden="true"></i></a>';
                                 }
 
-                                if ($reply === reset($replies) && 0 == $replies[0]['locked'] && $replies[0]['id_user'] === $this->session->id) {
+                                if ($reply === reset($replies) && 0 == $replies[0]['locked'] && $replies[0]['id_user'] === $this->session->id && $permissions->lock_own || $reply === reset($replies) && 0 == $replies[0]['locked'] && $permissions->lock_any) {
                                     echo ' <a href="'.base_url('Topic/closeTopic').'" id="closeTopic" data-id="'.$reply['id_topic'].'" class="btn indigo pull-right"><i class="fa fa-times" aria-hidden="true"></i></a>';
                                 }
 
-                                if (false) {
+                                if ($reply['id_user'] === $this->session->id && $permissions->remove_own || $permissions->remove_any) {
                                     echo '<a href="" class="btn btn-danger pull-right"><i class="fa fa-trash-o" aria-hidden="true"></i></a>';
                                 }
                             }

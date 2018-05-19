@@ -47,7 +47,7 @@ class topicModel extends CI_Model
 
     public function get_data_topic_by_id($id_topic)
     {
-        $this->db->select('topics.id_topic,topics.id_board,messages.title');
+        $this->db->select('topics.id_topic,topics.id_board,topics.locked,messages.title');
         $this->db->from('topics');
         $this->db->join('messages','messages.id_msg=topics.id_first_msg','INNER');
         $this->db->where('topics.id_topic='.$id_topic.'');
@@ -108,7 +108,7 @@ class topicModel extends CI_Model
 
     public function get_message_by_id_msg($id_msg)
     {
-        $this->db->select('users.nick, messages.id_msg, messages.id_topic, messages.title, messages.body, messages.poster_time');
+        $this->db->select('users.nick, messages.id_msg, messages.id_topic,messages.id_user, messages.title, messages.body, messages.poster_time');
         $this->db->from('messages');
         $this->db->where("id_msg=$id_msg");
         $this->db->join('users','users.id=messages.id_user','INNER');

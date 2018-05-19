@@ -54,6 +54,7 @@ class Login extends CI_Controller
                 'nick'     => $data_user[0]['nick'],
                 'email' => $data_user[0]['email'],
                 'avatar' => $data_user[0]['avatar'],
+                'rol' => $data_user[0]['rol'],
                 'logged' => TRUE
             );
 
